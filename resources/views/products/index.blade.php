@@ -149,7 +149,7 @@
                     </a>
                 @endforeach
             </div>
-            <div style="border-top:1px solid rgba(255,255,255,0.06); margin-bottom:2rem;"></div>
+            <div style="border-top:1px solid rgba(255,255,255,0.35); margin-bottom:2rem;"></div>
         @endif
 
         {{-- Products grid --}}

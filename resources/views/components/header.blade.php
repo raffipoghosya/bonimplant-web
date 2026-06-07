@@ -1,8 +1,8 @@
 {{--
     Header Component
-    - Logo from public/images/logo.png
-    - Nav links with active state
-    - Alpine.js language switcher dropdown (shows only OTHER locales)
+    - Logo 76px from left edge
+    - Centered navigation with bg-white/20 active state
+    - Contact + divider + Language switcher 44px from right edge
 --}}
 @php
     $currentLocale = app()->getLocale();
@@ -17,20 +17,17 @@
 
 <header class="site-header">
 
-    {{-- Logo --}}
+    {{-- Logo: 76px from left edge --}}
     <a href="{{ route('home') }}" class="header-logo">
         <img src="{{ asset('images/logo.png') }}"
              alt="BonImplant"
-             style="height:48px; width:auto; display:block;"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-        {{-- SVG fallback if image missing --}}
-        <span style="display:none;">@include('components.logo')</span>
+             style="height:48px; width:auto; display:block;">
     </a>
 
-    {{-- Navigation --}}
+    {{-- Centered Navigation --}}
     <nav class="header-nav" role="navigation" aria-label="Main navigation">
         <a href="{{ route('home') }}#about"
-           class="nav-link">
+           class="nav-link {{ request()->routeIs('home') && !request()->is('products*') && !request()->is('news*') ? 'active' : '' }}">
             {{ __('messages.nav_about') }}
         </a>
         <a href="{{ route('products.index') }}"
@@ -38,28 +35,27 @@
             {{ __('messages.nav_products') }}
         </a>
         <a href="{{ route('home') }}#news"
-           class="nav-link">
+           class="nav-link {{ request()->routeIs('news.*') ? 'active' : '' }}">
             {{ __('messages.nav_news') }}
         </a>
     </nav>
 
-    {{-- Right section: Contact + Language switcher dropdown --}}
+    {{-- Right section: Contact + divider + Language switcher --}}
     <div class="header-right">
 
         {{-- Contact link --}}
-        <a href="{{ route('home') }}#contact"
-           class="nav-link"
-           style="border-left: 1px solid rgba(255,255,255,0.08);">
+        <a href="{{ route('home') }}#contact" class="header-contact-link">
             {{ __('messages.nav_contact') }}
         </a>
 
+        {{-- Single vertical divider: 1px white/35, 24px spacing each side --}}
+        <div class="header-divider"></div>
+
         {{-- Language Switcher Dropdown (Alpine.js) --}}
         <div class="lang-switcher" x-data="{ open: false }" @click.outside="open = false">
-
-            {{-- Active language button --}}
             <button
                 type="button"
-                class="lang-btn lang-btn-active"
+                class="lang-btn-active"
                 @click="open = !open"
                 :aria-expanded="open"
                 aria-haspopup="true"
@@ -72,7 +68,6 @@
                 </svg>
             </button>
 
-            {{-- Dropdown: only OTHER locales --}}
             <div class="lang-dropdown"
                  x-show="open"
                  x-transition:enter="transition ease-out duration-150"

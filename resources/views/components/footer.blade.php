@@ -1,24 +1,21 @@
 {{--
     Footer Component
-    - Logo from public/images/footerleftlogo.png
-    - Centered nav links
-    - Decorative implant from public/images/harmology.png (right side)
-    - Contact info left, nav center, decorative image right
+    - Main logo (logo.png) on left above contact info
+    - Decorative implant image (footerleftlogo.png) on right
+    - No center nav column (matches Figma)
 --}}
 <footer class="site-footer">
     <div class="container-site" style="padding-top:3.5rem; padding-bottom:3.5rem;">
 
-        {{-- Main 3-column footer grid: Logo+Contact | Nav (center) | Decorative image --}}
-        <div style="display:grid; grid-template-columns:1fr auto 1fr; gap:2rem; align-items:center; position:relative;">
+        {{-- 2-column footer grid: Logo+Contact (left) | Decorative image (right) --}}
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center; position:relative;">
 
             {{-- LEFT: Logo + Contact info --}}
             <div>
                 <a href="{{ route('home') }}" style="display:inline-block; margin-bottom:2rem;">
-                    <img src="{{ asset('images/footerleftlogo.png') }}"
+                    <img src="{{ asset('images/logo.png') }}"
                          alt="BonImplant"
-                         style="height:56px; width:auto; display:block;"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <span style="display:none;">@include('components.logo')</span>
+                         style="height:56px; width:auto; display:block;">
                 </a>
 
                 <div style="display:flex; flex-direction:column; gap:0.875rem; margin-bottom:1.5rem;">
@@ -47,30 +44,17 @@
                 </div>
             </div>
 
-            {{-- CENTER: Navigation links, perfectly centered --}}
-            <nav style="display:flex; flex-direction:column; align-items:center; gap:1.25rem; text-align:center;" aria-label="Footer navigation">
-                <a href="{{ route('home') }}#about" class="footer-nav-link">
-                    {{ __('messages.nav_about') }}
-                </a>
-                <a href="{{ route('products.index') }}" class="footer-nav-link">
-                    {{ __('messages.nav_products') }}
-                </a>
-                <a href="{{ route('home') }}#news" class="footer-nav-link">
-                    {{ __('messages.nav_news') }}
-                </a>
-            </nav>
-
-            {{-- RIGHT: Decorative implant image --}}
+            {{-- RIGHT: Decorative implant image (moved from left) --}}
             <div style="display:flex; align-items:center; justify-content:flex-end;">
-                <img src="{{ asset('images/harmology.png') }}"
+                <img src="{{ asset('images/footerleftlogo.png') }}"
                      alt="Bone Implant"
-                     style="max-width:340px; width:100%; opacity:0.85;"
+                     style="max-width:420px; width:100%; opacity:0.85;"
                      onerror="this.style.display='none'">
             </div>
         </div>
 
         {{-- Bottom bar: copyright + design credit --}}
-        <div style="display:flex; justify-content:space-between; align-items:center; padding-top:2rem; margin-top:1.5rem; border-top:1px solid rgba(255,255,255,0.08);">
+        <!-- <div style="display:flex; justify-content:space-between; align-items:center; padding-top:2rem; margin-top:1.5rem; border-top:1px solid rgba(255,255,255,0.35);"> -->
             <span style="font-size:0.8rem; color:rgba(255,255,255,0.35);">
                 {{ __('messages.footer_copyright') }}
             </span>

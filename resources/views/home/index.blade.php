@@ -9,18 +9,15 @@
      SECTION 1: HERO
      ============================================================ --}}
 <section class="hero-section" id="hero">
-    <div class="container-site" style="width:100%; display:flex; align-items:center; position:relative; z-index:2;">
+    <div style="width:100%; display:flex; align-items:flex-start; position:relative; z-index:2; padding-left:76px; padding-top:120px;">
         <div class="hero-content animate-fade-in-up">
-            <p style="font-size:0.8rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:1rem;">
-                MADE IN ARMENIA
-            </p>
-            <h1 class="heading-hero" style="color:white; margin-bottom:0.25rem;">
+            <h1 class="heading-hero" style="color:white; margin-bottom:0.25rem; text-transform:uppercase;">
                 {{ __('messages.hero_title_1') }}
             </h1>
-            <h1 class="heading-hero" style="color:var(--color-primary); margin-bottom:0.25rem;">
+            <h1 class="heading-hero" style="color:var(--color-primary); margin-bottom:0.25rem; text-transform:uppercase;">
                 {{ __('messages.hero_title_2') }}
             </h1>
-            <h1 class="heading-hero" style="color:white; margin-bottom:2rem;">
+            <h1 class="heading-hero" style="color:white; margin-bottom:2rem; text-transform:uppercase;">
                 {{ __('messages.hero_title_3') }}
             </h1>
             <p style="font-size:0.95rem; color:rgba(255,255,255,0.6); max-width:420px; line-height:1.7; margin-bottom:2.5rem;">

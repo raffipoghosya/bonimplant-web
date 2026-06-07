@@ -9,6 +9,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Actions\EditAction;
 use Filament\Tables\Table;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
@@ -106,7 +107,7 @@ class AboutUsResource extends Resource
                 Tables\Columns\TextColumn::make('updated_at')->dateTime()->label('Last Updated'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                EditAction::make(),
             ]);
     }
 

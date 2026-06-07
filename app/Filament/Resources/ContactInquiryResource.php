@@ -9,6 +9,8 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Actions\Action;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Table;
 
 class ContactInquiryResource extends Resource
@@ -56,8 +58,8 @@ class ContactInquiryResource extends Resource
                 Tables\Filters\TernaryFilter::make('is_read')->label('Read Status'),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\Action::make('mark_read')
+                ViewAction::make(),
+                Action::make('mark_read')
                     ->label('Mark Read')
                     ->icon('heroicon-o-check')
                     ->action(fn (ContactInquiry $record) => $record->update(['is_read' => true]))

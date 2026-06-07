@@ -9,6 +9,8 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 
@@ -87,8 +89,8 @@ class CategoryResource extends Resource
                 Tables\Columns\TextColumn::make('products_count')->counts('products')->label('Products'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
             ]);
     }
 

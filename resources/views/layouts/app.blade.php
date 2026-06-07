@@ -15,6 +15,9 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    {{-- Prevent Alpine.js flicker --}}
+    <style>[x-cloak] { display: none !important; }</style>
+
     @stack('head')
 </head>
 <body>

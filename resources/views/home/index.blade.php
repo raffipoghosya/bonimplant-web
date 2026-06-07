@@ -39,11 +39,11 @@
 
     {{-- Hero image: bone/implant 3D render --}}
     <div class="hero-image-wrapper">
-        <img src="{{ asset('images/hero-implant.jpg') }}"
+        <img src="{{ asset('images/herologo.png') }}"
              alt="Bone Implant"
              onerror="this.parentElement.style.background='linear-gradient(135deg, #0a1f30 0%, #001326 100%)'">
         {{-- Gradient overlay on left side to blend with dark --}}
-        <div style="position:absolute; inset:0; background:linear-gradient(to right, var(--color-dark) 0%, transparent 40%);"></div>
+        <div style="position:absolute; inset:0; background:linear-gradient(to right, var(--color-dark) 5%, transparent 45%);"></div>
     </div>
 
     {{-- Subtle grid overlay --}}
@@ -64,25 +64,10 @@
                      alt="{{ $aboutUs->getTranslation('title', app()->getLocale()) }}"
                      style="width:100%; height:100%; object-fit:cover;">
             @else
-                {{-- Placeholder: show a decorative implant plates image --}}
-                <img src="{{ asset('images/about-implants.jpg') }}"
+                {{-- Static design image from public/images --}}
+                <img src="{{ asset('images/abouteuslogi.png') }}"
                      alt="Bone Implants"
-                     style="width:100%; height:100%; object-fit:cover; object-position:center;"
-                     onerror="this.style.display='none'">
-                {{-- Fallback gradient with text --}}
-                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, #c8dde0 0%, #a8ccd2 100%);">
-                    <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.4">
-                        <rect x="30" y="40" width="140" height="30" rx="8" stroke="#001326" stroke-width="3" fill="none"/>
-                        <circle cx="55" cy="55" r="8" stroke="#001326" stroke-width="2" fill="none"/>
-                        <circle cx="100" cy="55" r="8" stroke="#001326" stroke-width="2" fill="none"/>
-                        <circle cx="145" cy="55" r="8" stroke="#001326" stroke-width="2" fill="none"/>
-                        <rect x="50" y="90" width="100" height="25" rx="6" stroke="#001326" stroke-width="2.5" fill="none"/>
-                        <circle cx="70" cy="102" r="6" stroke="#001326" stroke-width="2" fill="none"/>
-                        <circle cx="100" cy="102" r="6" stroke="#001326" stroke-width="2" fill="none"/>
-                        <circle cx="130" cy="102" r="6" stroke="#001326" stroke-width="2" fill="none"/>
-                        <rect x="60" y="135" width="80" height="20" rx="5" stroke="#001326" stroke-width="2" fill="none"/>
-                    </svg>
-                </div>
+                     style="width:100%; height:100%; object-fit:cover; object-position:center;">
             @endif
         </div>
 
@@ -142,19 +127,10 @@
             <a href="{{ route('products.index', ['category' => $orthoCat?->id]) }}"
                class="product-card product-card-teal">
                 <div class="product-card-icon">
-                    @if($orthoCat && $orthoCat->icon_svg)
-                        {!! $orthoCat->icon_svg !!}
-                    @else
-                        {{-- Default orthopedics knee joint SVG --}}
-                        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" style="width:120px;height:120px;stroke:white;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;">
-                            <ellipse cx="60" cy="45" rx="22" ry="28"/>
-                            <path d="M38 45 L30 72 L42 80 L50 72"/>
-                            <path d="M82 45 L90 72 L78 80 L70 72"/>
-                            <path d="M50 72 Q60 78 70 72"/>
-                            <path d="M55 17 L48 5 M65 17 L72 5"/>
-                            <path d="M38 36 L28 30 M82 36 L92 30"/>
-                        </svg>
-                    @endif
+                    <img src="{{ asset('images/orthopedist.png') }}"
+                         alt="Orthopedics"
+                         style="width:140px; height:140px; object-fit:contain;"
+                         onerror="this.style.display='none'">
                 </div>
                 <div class="product-card-name">
                     {{ $orthoCat ? $orthoCat->getTranslation('name', app()->getLocale()) : __('messages.cat_orthopedics') }}
@@ -164,18 +140,10 @@
             <a href="{{ route('products.index', ['category' => $traumaCat?->id]) }}"
                class="product-card product-card-dark">
                 <div class="product-card-icon">
-                    @if($traumaCat && $traumaCat->icon_svg)
-                        {!! $traumaCat->icon_svg !!}
-                    @else
-                        {{-- Default traumatology bone plate SVG --}}
-                        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" style="width:120px;height:120px;stroke:white;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;">
-                            <path d="M30 40 Q40 20 60 15 Q80 10 90 30 Q95 45 85 65 Q75 85 55 88 Q35 92 25 72 Q18 58 30 40Z"/>
-                            <circle cx="50" cy="45" r="8"/>
-                            <circle cx="70" cy="55" r="6"/>
-                            <circle cx="55" cy="70" r="5"/>
-                            <path d="M42 37 Q55 30 68 49"/>
-                        </svg>
-                    @endif
+                    <img src="{{ asset('images/harmology.png') }}"
+                         alt="Traumatology"
+                         style="width:140px; height:140px; object-fit:contain;"
+                         onerror="this.style.display='none'">
                 </div>
                 <div class="product-card-name">
                     {{ $traumaCat ? $traumaCat->getTranslation('name', app()->getLocale()) : __('messages.cat_traumatology') }}
@@ -185,23 +153,10 @@
             <a href="{{ route('products.index', ['category' => $instrCat?->id]) }}"
                class="product-card product-card-dark">
                 <div class="product-card-icon">
-                    @if($instrCat && $instrCat->icon_svg)
-                        {!! $instrCat->icon_svg !!}
-                    @else
-                        {{-- Default instruments SVG --}}
-                        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" style="width:120px;height:120px;stroke:white;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;">
-                            <circle cx="60" cy="60" r="18"/>
-                            <circle cx="60" cy="60" r="8"/>
-                            <line x1="60" y1="20" x2="60" y2="42"/>
-                            <line x1="60" y1="78" x2="60" y2="100"/>
-                            <line x1="20" y1="60" x2="42" y2="60"/>
-                            <line x1="78" y1="60" x2="100" y2="60"/>
-                            <path d="M38 38 L47 47"/>
-                            <path d="M73 73 L82 82"/>
-                            <path d="M82 38 L73 47"/>
-                            <path d="M47 73 L38 82"/>
-                        </svg>
-                    @endif
+                    <img src="{{ asset('images/tools.png') }}"
+                         alt="Instruments"
+                         style="width:140px; height:140px; object-fit:contain;"
+                         onerror="this.style.display='none'">
                 </div>
                 <div class="product-card-name">
                     {{ $instrCat ? $instrCat->getTranslation('name', app()->getLocale()) : __('messages.cat_instruments') }}

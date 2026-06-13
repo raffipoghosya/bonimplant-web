@@ -40,7 +40,7 @@
              alt="Bone Implant"
              onerror="this.parentElement.style.background='linear-gradient(135deg, #0a1f30 0%, #001326 100%)'">
         {{-- Gradient overlay on left side to blend with dark --}}
-        <div style="position:absolute; inset:0; background:linear-gradient(to right, var(--color-dark) 5%, transparent 45%);"></div>
+        <div style="position:absolute; inset:0;"></div>
     </div>
 
     {{-- Subtle grid overlay --}}

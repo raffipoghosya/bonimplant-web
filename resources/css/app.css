@@ -880,7 +880,7 @@ body {
 .prose-light h2, .prose-light h3 { color: var(--color-dark); font-weight: 700; margin-bottom: 0.75rem; }
 
 /* Section padding */
-.section-pad { padding: 6rem 0; }
+.section-pad { padding: 0rem 0; }
 .section-pad-sm { padding: 4rem 0; }
 
 /* Container */

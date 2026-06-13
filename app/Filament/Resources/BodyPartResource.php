@@ -5,6 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BodyPartResource\Pages;
 use App\Models\BodyPart;
 use Filament\Forms;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Resources\Resource;
@@ -30,10 +33,10 @@ class BodyPartResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Forms\Components\Tabs::make('Translations')
+            Tabs::make('Translations')
                 ->columnSpanFull()
                 ->tabs([
-                    Forms\Components\Tabs\Tab::make('🇦🇲 Armenian (HY)')
+                    Tab::make('🇦🇲 Armenian (HY)')
                         ->schema([
                             Forms\Components\TextInput::make('name.hy')
                                 ->label('Name (Armenian)')
@@ -41,13 +44,13 @@ class BodyPartResource extends Resource
                                 ->live(onBlur: true)
                                 ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
                         ]),
-                    Forms\Components\Tabs\Tab::make('🇷🇺 Russian (RU)')
+                    Tab::make('🇷🇺 Russian (RU)')
                         ->schema([Forms\Components\TextInput::make('name.ru')->label('Name (Russian)')]),
-                    Forms\Components\Tabs\Tab::make('🇬🇧 English (EN)')
+                    Tab::make('🇬🇧 English (EN)')
                         ->schema([Forms\Components\TextInput::make('name.en')->label('Name (English)')]),
                 ]),
 
-            Forms\Components\Section::make('Details')
+            Section::make('Details')
                 ->columns(2)
                 ->schema([
                     Forms\Components\TextInput::make('slug')->required()->unique(ignoreRecord: true),

@@ -5,13 +5,13 @@
     - No center nav column (matches Figma)
 --}}
 <footer class="site-footer">
-    <div class="container-site" style="padding-top:3.5rem; padding-bottom:3.5rem;">
+    <div id="footertest" class="container-site" style="padding-top:3.5rem; padding-bottom:3.5rem;">
 
         {{-- 2-column footer grid: Logo+Contact (left) | Decorative image (right) --}}
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center; position:relative;">
 
             {{-- LEFT: Logo + Contact info --}}
-            <div>
+            <div class="footerinfo" style="padding-left: 50px;">
                 <a href="{{ route('home') }}" style="display:inline-block; margin-bottom:2rem;">
                     <img src="{{ asset('images/logo.png') }}"
                          alt="BonImplant"

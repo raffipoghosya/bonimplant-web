@@ -52,7 +52,7 @@
      SECTION 2: ABOUT US
      ============================================================ --}}
 <section class="about-section section-pad" id="about">
-    <div style="display:grid; grid-template-columns:1fr 1fr; min-height:600px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr;">
 
         {{-- Left: Image --}}
         <div class="about-image-col">
@@ -64,14 +64,14 @@
                 {{-- Static design image from public/images --}}
                 <img src="{{ asset('images/abouteuslogi.png') }}"
                      alt="Bone Implants"
-                     style="width:100%; height:100%; object-fit:cover; object-position:center;">
+                     style="width:80%; height:80%; object-fit:cover; object-position:center;">
             @endif
         </div>
 
         {{-- Right: Text + Stats --}}
-        <div style="display:flex; flex-direction:column; justify-content:center; padding:4rem 4rem 3rem;">
+        <div style="display:flex; flex-direction:column;  padding:4rem 4rem 0rem;">
 
-            <p style="font-size:0.8rem; font-weight:800; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-primary); margin-bottom:0.75rem;">
+            <p style="font-size:48px; font-weight:800; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-primary); margin-bottom:0.75rem;">
                 {{ $aboutUs->getTranslation('title', app()->getLocale()) }}
             </p>
 
@@ -122,7 +122,7 @@
             @endphp
 
             <a href="{{ route('products.index', ['category' => $orthoCat?->id]) }}"
-               class="product-card product-card-teal">
+               class="product-card ">
                 <div class="product-card-icon">
                     <img src="{{ asset('images/orthopedist.png') }}"
                          alt="Orthopedics"
@@ -135,7 +135,7 @@
             </a>
 
             <a href="{{ route('products.index', ['category' => $traumaCat?->id]) }}"
-               class="product-card product-card-dark">
+               class="product-card ">
                 <div class="product-card-icon">
                     <img src="{{ asset('images/harmology.png') }}"
                          alt="Traumatology"
@@ -148,7 +148,7 @@
             </a>
 
             <a href="{{ route('products.index', ['category' => $instrCat?->id]) }}"
-               class="product-card product-card-dark">
+               class="product-card ">
                 <div class="product-card-icon">
                     <img src="{{ asset('images/tools.png') }}"
                          alt="Instruments"
@@ -211,7 +211,7 @@
         </div>
 
         {{-- Progress bar --}}
-        <div style="margin-top:1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div style="margin-top:1.5rem; grid-template-columns:1fr 1fr; gap:1rem;">
             <div class="slider-progress-bar">
                 <div class="slider-progress-fill" id="news-progress" style="width:33%"></div>
             </div>

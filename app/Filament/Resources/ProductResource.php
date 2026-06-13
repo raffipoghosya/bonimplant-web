@@ -7,6 +7,9 @@ use App\Models\BodyPart;
 use App\Models\Category;
 use App\Models\Product;
 use Filament\Forms;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Resources\Resource;
@@ -35,10 +38,10 @@ class ProductResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Forms\Components\Tabs::make('Translations')
+            Tabs::make('Translations')
                 ->columnSpanFull()
                 ->tabs([
-                    Forms\Components\Tabs\Tab::make('🇦🇲 Armenian (HY)')
+                    Tab::make('🇦🇲 Armenian (HY)')
                         ->schema([
                             Forms\Components\TextInput::make('title.hy')
                                 ->label('Title (Armenian)')
@@ -51,7 +54,7 @@ class ProductResource extends Resource
                                 ->label('Description (Armenian)')
                                 ->columnSpanFull(),
                         ]),
-                    Forms\Components\Tabs\Tab::make('🇷🇺 Russian (RU)')
+                    Tab::make('🇷🇺 Russian (RU)')
                         ->schema([
                             Forms\Components\TextInput::make('title.ru')
                                 ->label('Title (Russian)'),
@@ -59,7 +62,7 @@ class ProductResource extends Resource
                                 ->label('Description (Russian)')
                                 ->columnSpanFull(),
                         ]),
-                    Forms\Components\Tabs\Tab::make('🇬🇧 English (EN)')
+                    Tab::make('🇬🇧 English (EN)')
                         ->schema([
                             Forms\Components\TextInput::make('title.en')
                                 ->label('Title (English)'),
@@ -69,7 +72,7 @@ class ProductResource extends Resource
                         ]),
                 ]),
 
-            Forms\Components\Section::make('Details')
+            Section::make('Details')
                 ->columns(2)
                 ->schema([
                     Forms\Components\TextInput::make('slug')
@@ -98,7 +101,7 @@ class ProductResource extends Resource
                         ->default(0),
                 ]),
 
-            Forms\Components\Section::make('Primary Image')
+            Section::make('Primary Image')
                 ->schema([
                     SpatieMediaLibraryFileUpload::make('primary_image')
                         ->label('Primary Image')
@@ -115,7 +118,7 @@ class ProductResource extends Resource
                         ->columnSpanFull(),
                 ]),
 
-            Forms\Components\Section::make('Gallery Images')
+            Section::make('Gallery Images')
                 ->schema([
                     SpatieMediaLibraryFileUpload::make('gallery')
                         ->label('Gallery')

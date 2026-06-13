@@ -26,19 +26,19 @@
 
     {{-- Centered Navigation --}}
     <nav class="header-nav" role="navigation" aria-label="Main navigation">
-        <a href="{{ route('home') }}#about"
-           class="nav-link {{ request()->routeIs('home') && !request()->is('products*') && !request()->is('news*') ? 'active' : '' }}">
-            {{ __('messages.nav_about') }}
-        </a>
-        <a href="{{ route('products.index') }}"
-           class="nav-link {{ request()->routeIs('products.*') ? 'active' : '' }}">
-            {{ __('messages.nav_products') }}
-        </a>
-        <a href="{{ route('home') }}#news"
-           class="nav-link {{ request()->routeIs('news.*') ? 'active' : '' }}">
-            {{ __('messages.nav_news') }}
-        </a>
-    </nav>
+    <a href="{{ route('home') }}#about" class="nav-link">
+        {{ __('messages.nav_about') }}
+    </a>
+
+    <a href="{{ route('products.index') }}"
+       class="nav-link only-active-link {{ request()->routeIs('products.*') ? 'active' : '' }}">
+        {{ __('messages.nav_products') }}
+    </a>
+
+    <a href="{{ route('home') }}#news" class="nav-link">
+        {{ __('messages.nav_news') }}
+    </a>
+</nav>
 
     {{-- Right section: Contact + divider + Language switcher --}}
     <div class="header-right">

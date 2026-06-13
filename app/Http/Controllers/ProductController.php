@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BodyPart;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\SkeletonPart;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -48,7 +49,13 @@ class ProductController extends Controller
         $selectedCategory = $categoryId ? Category::find($categoryId) : null;
         $selectedBodyPart = $bodyPartId ? BodyPart::find($bodyPartId) : null;
 
-        return view('products.index', compact('categories', 'bodyParts', 'products', 'selectedCategory', 'selectedBodyPart'));
+        // Skeleton tooltip data — keyed by svg_element_id
+        $skeletonParts = SkeletonPart::forFrontend();
+
+        return view('products.index', compact(
+            'categories', 'bodyParts', 'products',
+            'selectedCategory', 'selectedBodyPart', 'skeletonParts'
+        ));
     }
 
     public function show(Product $product)
@@ -65,6 +72,9 @@ class ProductController extends Controller
 
         $gallery = $product->getMedia('gallery');
 
-        return view('products.show', compact('product', 'categories', 'bodyParts', 'gallery'));
+        // Skeleton tooltip data — keyed by svg_element_id
+        $skeletonParts = SkeletonPart::forFrontend();
+
+        return view('products.show', compact('product', 'categories', 'bodyParts', 'gallery', 'skeletonParts'));
     }
 }

@@ -1,15 +1,90 @@
 @import 'tailwindcss';
 
+
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
+
+/* =========================================================
+   Custom Font — Montserratarm (Armenian Montserrat)
+   Placed AFTER @import so Vite/Tailwind does not strip rules.
+   Font files live in: public/fonts/Montserrat_am3/
+   Served at runtime via Laravel's public/ directory.
+   ========================================================= */
+
+@font-face {
+    font-family: 'Montserrat_am3';
+    src: url('/fonts/Montserrat_am3/Montserratarm-Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat_am3';
+    src: url('/fonts/Montserrat_am3/Montserratarm-Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat_am3';
+    src: url('/fonts/Montserrat_am3/Montserratarm-Regular.woff2') format('woff2'),
+         url('/fonts/Montserrat_am3/Montserratarm-Regular.woff')  format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat_am3';
+    src: url('/fonts/Montserrat_am3/Montserratarm-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat_am3';
+    src: url('/fonts/Montserrat_am3/Montserratarm-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat_am3';
+    src: url('/fonts/Montserrat_am3/Montserratarm-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat_am3';
+    src: url('/fonts/Montserrat_am3/Montserratarm-ExtraBold.otf') format('opentype');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat_am3';
+    src: url('/fonts/Montserrat_am3/Montserratarm-Black.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
 
 /* =========================================================
    BonImplant Design System
    ========================================================= */
 
 @theme {
-    /* Fonts */
-    --font-sans: 'Inter', 'Noto Sans Armenian', ui-sans-serif, system-ui, sans-serif;
+    /* Fonts – Montserrat_am3 globally, Inter/Noto as fallbacks */
+    --font-sans: 'Montserrat_am3', 'Inter', 'Noto Sans Armenian', ui-sans-serif, system-ui, sans-serif;
 
     /* Brand Colors */
     --color-primary:       #4AC2BC;
@@ -44,10 +119,20 @@ html {
 }
 
 body {
-    font-family: var(--font-sans);
+    font-family: 'Montserrat_am3', 'Inter', 'Noto Sans Armenian', ui-sans-serif, system-ui, sans-serif !important;
     background-color: var(--color-dark);
     color: #ffffff;
     overflow-x: hidden;
+}
+
+/* ── Bulletproof global font override ────────────────────────────────
+   Forces Montserrat_am3 onto every element, overriding Filament,
+   Alpine, browser defaults, and any other stylesheet.
+   ----------------------------------------------------------------- */
+html,
+html body,
+html body *:not(.fi-icon):not(svg):not(svg *) {
+    font-family: 'Montserrat_am3', 'Inter', 'Noto Sans Armenian', ui-sans-serif, system-ui, sans-serif !important;
 }
 
 /* =========================================================
@@ -103,9 +188,7 @@ body {
     align-items: center;
     gap: 0;
     height: 100%;
-}
-
-.nav-link {
+}.nav-link {
     display: flex;
     align-items: center;
     padding: 0 1.75rem;
@@ -117,19 +200,26 @@ body {
     text-decoration: none;
     transition: color 0.2s, background 0.2s;
     height: 100%;
-    background-color: rgba(255,255,255,0.04);
+    background-color: transparent; 
+    border-right: 1px solid rgba(255, 255, 255, 0.15); /* Բոլորի աջ գիծը */
 }
 
+/* Ձախ գիծը ՄԻԱՅՆ առաջին էլեմենտի (ՄԵՐ ՄԱՍԻՆ-ի) համար */
+.nav-link:first-child {
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Հովեռի վիճակը (աշխատում է բոլորի համար) */
 .nav-link:hover {
-    color: white;
-    background-color: rgba(255,255,255,0.10);
-}
-
-.nav-link.active {
     color: var(--color-primary);
-    background-color: rgba(255,255,255,0.12);
+    background-color: rgba(255, 255, 255, 0.08); 
 }
 
+/* Ակտիվ վիճակը ՄԻԱՅՆ ապրանքների համար (շրջանցում է սքրոլի JS-ը) */
+.nav-link.only-active-link.active {
+    color: var(--color-primary);
+    background-color: rgba(255, 255, 255, 0.08);
+}
 .header-right {
     display: flex;
     align-items: center;
@@ -161,7 +251,6 @@ body {
     margin: 0 24px;
     flex-shrink: 0;
 }
-
 /* Language Switcher Dropdown */
 .lang-switcher {
     position: relative;
@@ -169,10 +258,11 @@ body {
     align-items: center;
 }
 
+/* Գլխավոր կոճակը (որը միշտ երևում է) */
 .lang-btn-active {
     display: flex;
     align-items: center;
-    padding: 0;
+    padding: 0; /* Պահում ենք 0, որպեսզի հեդեռի դասավորությունը չխախտվի */
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -188,44 +278,49 @@ body {
     color: var(--color-primary);
 }
 
+/* Ներքև բացվող պատուհանը */
 .lang-dropdown {
     position: absolute;
-    top: 100%;
-    right: 0;
-    min-width: 80px;
-    background-color: var(--color-dark-800);
-    border: 1px solid rgba(74, 194, 188, 0.25);
-    border-top: none;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    top: calc(100% + 16px); /* Իջեցնում ենք կոճակից 16px ներքև */
+    left: -16px; /* !!! ԿԱՐԵՎՈՐ Է. տեղաշարժում ենք ձախ, որպեսզի ներսի padding-ի հետ հավասարվի */
+    min-width: 100px;
+    background-color: #141e28; /* Հեդեռի մուգ ֆոնին շատ համահունչ գույն */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px; /* Սիրուն կլորացված եզրեր */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); /* Խորը ստվեր՝ վրայից բացվելու էֆեկտի համար */
     z-index: 100;
     overflow: hidden;
+    padding: 8px 0; /* Վերևից ու ներքևից փոքր արանք ենք տալիս */
 }
 
+/* Որպեսզի form-ը ավելորդ տեղ չզբաղեցնի */
 .lang-dropdown form {
     display: block;
     margin: 0;
 }
 
+/* Բացված ցանկի լեզուները */
 .lang-dropdown-item {
     display: block;
     width: 100%;
-    padding: 0.75rem 1.25rem;
+    padding: 10px 16px; /* !!! 16px ձախից padding-ը կոմպենսացնում է վերևի left: -16px-ը, որ տեքստերը ՆՈՒՅՆ գծի վրա ընկնեն */
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     color: rgba(255,255,255,0.6);
-    background: none;
+    background: transparent;
     border: none;
     cursor: pointer;
-    text-align: center;
-    transition: color 0.15s, background 0.15s;
+    text-align: left; /* Տեքստը հավասարեցնում ենք ձախ եզրից */
+    transition: all 0.2s ease;
 }
 
+/* Հովեռ անելիս լեզվի էֆեկտը */
 .lang-dropdown-item:hover {
     color: var(--color-primary);
-    background: rgba(74, 194, 188, 0.08);
+    background: rgba(255, 255, 255, 0.05); /* Շատ թեթև լուսավորվում է տակը */
+    padding-left: 20px; /* Սիրուն անիմացիա՝ հովեռի ժամանակ տեքստը մի փոքր առաջ է գալիս */
 }
-
 /* =========================================================
    Hero Section
    ========================================================= */
@@ -281,10 +376,10 @@ body {
     border-color: var(--color-primary);
 }
 
-.hero-btn-primary {
+/* .hero-btn-primary {
     border-color: var(--color-primary);
     color: var(--color-primary);
-}
+} */
 
 .hero-btn-primary:hover {
     background-color: var(--color-primary);
@@ -301,12 +396,12 @@ body {
     overflow: hidden;
 }
 
-.about-image-col {
+/* .about-image-col {
     position: relative;
     min-height: 500px;
     background: linear-gradient(135deg, #d4e8ea 0%, #b8d4d8 100%);
     overflow: hidden;
-}
+} */
 
 .about-image-col img {
     width: 100%;
@@ -359,13 +454,19 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 2.5rem 1.5rem 2rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-decoration: none;
+    
+    /* ԱՎԵԼԱՑՐԵՔ ԱՅՍ 2 ՏՈՂԸ */
+    background-color: var(--color-dark); /* Սկզբնական մուգ գույնը բոլորի համար */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Ավելացված է background-color 0.3s ease */
 }
 
 .product-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    
+    /* ԱՎԵԼԱՑՐԵՔ ԱՅՍ ՏՈՂԸ */
+    background-color: var(--color-primary); /* Առաջին քարտի փիրուզագույնը հովեռի ժամանակ */
 }
 
 .product-card-teal {
@@ -886,8 +987,11 @@ body {
 /* Container */
 .container-site {
     /* max-width: 1320px; */
-    margin: 0 auto;
-    padding: 0 2rem;
+    /* margin: 0 auto; */
+    padding: 50px 4rem;
+}
+#footertest{
+    padding: 50px 0.5rem;
 }
 
 @media (max-width: 1024px) {

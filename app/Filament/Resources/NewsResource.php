@@ -5,6 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\NewsResource\Pages;
 use App\Models\News;
 use Filament\Forms;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Resources\Resource;
@@ -33,10 +36,10 @@ class NewsResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Forms\Components\Tabs::make('Translations')
+            Tabs::make('Translations')
                 ->columnSpanFull()
                 ->tabs([
-                    Forms\Components\Tabs\Tab::make('🇦🇲 Armenian (HY)')
+                    Tab::make('🇦🇲 Armenian (HY)')
                         ->schema([
                             Forms\Components\TextInput::make('title.hy')
                                 ->label('Title (Armenian)')
@@ -53,7 +56,7 @@ class NewsResource extends Resource
                                 ->label('Full Description (Armenian)')
                                 ->columnSpanFull(),
                         ]),
-                    Forms\Components\Tabs\Tab::make('🇷🇺 Russian (RU)')
+                    Tab::make('🇷🇺 Russian (RU)')
                         ->schema([
                             Forms\Components\TextInput::make('title.ru')
                                 ->label('Title (Russian)'),
@@ -65,7 +68,7 @@ class NewsResource extends Resource
                                 ->label('Full Description (Russian)')
                                 ->columnSpanFull(),
                         ]),
-                    Forms\Components\Tabs\Tab::make('🇬🇧 English (EN)')
+                    Tab::make('🇬🇧 English (EN)')
                         ->schema([
                             Forms\Components\TextInput::make('title.en')
                                 ->label('Title (English)'),
@@ -79,7 +82,7 @@ class NewsResource extends Resource
                         ]),
                 ]),
 
-            Forms\Components\Section::make('Settings')
+            Section::make('Settings')
                 ->columns(2)
                 ->schema([
                     Forms\Components\TextInput::make('slug')
@@ -94,7 +97,7 @@ class NewsResource extends Resource
                         ->default(true),
                 ]),
 
-            Forms\Components\Section::make('Main Image')
+            Section::make('Main Image')
                 ->schema([
                     SpatieMediaLibraryFileUpload::make('main_image')
                         ->label('Main Image (shown on homepage card)')
@@ -106,7 +109,7 @@ class NewsResource extends Resource
                         ->columnSpanFull(),
                 ]),
 
-            Forms\Components\Section::make('Gallery')
+            Section::make('Gallery')
                 ->schema([
                     SpatieMediaLibraryFileUpload::make('gallery')
                         ->label('Gallery Images')

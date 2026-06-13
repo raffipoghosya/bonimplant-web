@@ -105,7 +105,7 @@
             <div x-show="openBodyParts" x-collapse>
                 {{-- Interactive Skeleton --}}
                 <div style="padding:1rem 0;">
-                    @include('components.skeleton-body', ['activeZone' => request('zone')])
+                    @include('components.skeleton-body', ['activeZone' => request('zone'), 'skeletonParts' => $skeletonParts])
                 </div>
 
                 {{-- Body Part checkboxes --}}
@@ -132,7 +132,7 @@
             {{ __('messages.products_page_title') }}
         </h1>
 
-        {{-- Category cards grid --}}
+        <!-- {{-- Category cards grid --}}
         @if(!request('category') && !request('body_part'))
             <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem; margin-bottom:2.5rem;">
                 @foreach($categories as $cat)
@@ -150,7 +150,7 @@
                 @endforeach
             </div>
             <div style="border-top:1px solid rgba(255,255,255,0.35); margin-bottom:2rem;"></div>
-        @endif
+        @endif -->
 
         {{-- Products grid --}}
         @if($products->count())

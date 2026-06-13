@@ -45,12 +45,12 @@
 
         {{-- Right: Title + Full description --}}
         <div>
-            {{-- Date --}}
+            <!-- {{-- Date --}}
             @if($news->published_at)
                 <p style="font-size:0.75rem; color:rgba(255,255,255,0.35); letter-spacing:0.08em; margin-bottom:1rem;">
                     {{ $news->published_at->format('d.m.Y') }}
                 </p>
-            @endif
+            @endif -->
 
             <h1 style="font-size:clamp(1.25rem, 3vw, 2rem); font-weight:800; color:white; line-height:1.2; margin-bottom:2rem;">
                 {{ $news->getTranslation('title', app()->getLocale()) }}
@@ -59,6 +59,12 @@
             <div class="prose-dark">
                 {!! $news->getTranslation('description', app()->getLocale()) !!}
             </div>
+             {{-- Date --}}
+            @if($news->published_at)
+                <p style="font-size:0.75rem; color:rgba(255,255,255,0.35); letter-spacing:0.08em; margin-bottom:1rem;">
+                    {{ $news->published_at->format('d.m.Y') }}
+                </p>
+            @endif
         </div>
     </div>
 </div>

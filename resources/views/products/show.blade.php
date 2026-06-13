@@ -58,7 +58,7 @@
             </div>
             <div x-show="openBodyParts" x-collapse>
                 <div style="padding:1rem 0;">
-                    @include('components.skeleton-body', ['activeZone' => $product->bodyPart?->skeleton_zone])
+                    @include('components.skeleton-body', ['activeZone' => $product->bodyPart?->skeleton_zone, 'skeletonParts' => $skeletonParts])
                 </div>
                 @foreach($bodyParts as $bodyPart)
                     <label class="sidebar-checkbox-item">

@@ -52,6 +52,7 @@
                      onerror="this.style.display='none'">
             </div>
         </div>
+        
 
         {{-- Bottom bar: copyright + design credit --}}
         <!-- <div style="display:flex; justify-content:space-between; align-items:center; padding-top:2rem; margin-top:1.5rem; border-top:1px solid rgba(255,255,255,0.35);"> -->

@@ -39,6 +39,10 @@ return [
     'sidebar_body_parts'   => 'Области тела',
     'sidebar_brand'        => 'Марка',
 
+    'cat_orthopedics'  => 'ОРТОПЕДИЯ',
+    'cat_traumatology' => 'ТРАВМАТОЛОГИЯ',
+    'cat_instruments'  => 'ИНСТРУМЕНТЫ',
+
     'news_page_title'   => 'Новости',
     'read_more'         => 'Читать далее',
 

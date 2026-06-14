@@ -26,7 +26,7 @@ return [
     'contact_send'        => 'Send',
     'contact_success'     => 'Your message has been sent successfully.',
 
-    'footer_address'   => 'Yerevan, Sharav-Azbur 55a',
+    'footer_address'   => 'Yerevan, Sharav-Axbyur 55a',
     'footer_phone'     => '+374 33 62 50 50',
     'footer_email'     => 'info@justartmed.com',
     'footer_copyright' => 'Copyright ©2026',
@@ -38,6 +38,10 @@ return [
     'sidebar_category'     => 'Category',
     'sidebar_body_parts'   => 'Body Parts',
     'sidebar_brand'        => 'Brand',
+
+    'cat_orthopedics'  => 'ORTHOPEDICS',
+    'cat_traumatology' => 'TRAUMATOLOGY',
+    'cat_instruments'  => 'INSTRUMENTS',
 
     'news_page_title'   => 'News',
     'read_more'         => 'Read More',

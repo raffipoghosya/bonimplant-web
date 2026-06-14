@@ -72,7 +72,7 @@
         0 8px 32px rgba(0, 0, 0, 0.60),
         0 0 0 0.5px rgba(255,255,255,0.04) inset;
     /* Typography */
-    font-family:      'Montserrat_am3', 'Inter', sans-serif;
+    font-family:      'Montserrat_am3', sans-serif;
     font-size:        11px;
     font-weight:      700;
     letter-spacing:   0.07em;

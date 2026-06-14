@@ -84,7 +84,7 @@
 
 @theme {
     /* Fonts – Montserrat_am3 globally, Inter/Noto as fallbacks */
-    --font-sans: 'Montserrat_am3', 'Inter', 'Noto Sans Armenian', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Montserrat_am3', ui-sans-serif, system-ui, sans-serif;
 
     /* Brand Colors */
     --color-primary:       #4AC2BC;
@@ -119,7 +119,7 @@ html {
 }
 
 body {
-    font-family: 'Montserrat_am3', 'Inter', 'Noto Sans Armenian', ui-sans-serif, system-ui, sans-serif !important;
+    font-family: 'Montserrat_am3', ui-sans-serif, system-ui, sans-serif !important;
     background-color: var(--color-dark);
     color: #ffffff;
     overflow-x: hidden;
@@ -132,7 +132,7 @@ body {
 html,
 html body,
 html body *:not(.fi-icon):not(svg):not(svg *) {
-    font-family: 'Montserrat_am3', 'Inter', 'Noto Sans Armenian', ui-sans-serif, system-ui, sans-serif !important;
+    font-family: 'Montserrat_am3', ui-sans-serif, system-ui, sans-serif !important;
 }
 
 /* =========================================================
@@ -144,14 +144,14 @@ html body *:not(.fi-icon):not(svg):not(svg *) {
 
 .heading-hero {
     font-size: clamp(2rem, 5vw, 4rem);
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.1;
     letter-spacing: -0.02em;
 }
 
 .heading-section {
     font-size: clamp(1.75rem, 3.5vw, 3rem);
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.15;
     letter-spacing: -0.01em;
 }
@@ -337,7 +337,7 @@ html body *:not(.fi-icon):not(svg):not(svg *) {
 .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 600px;
+    max-width: 800px;
     padding-bottom: 4rem;
 }
 
@@ -391,17 +391,13 @@ html body *:not(.fi-icon):not(svg):not(svg *) {
    ========================================================= */
 
 .about-section {
-    background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+    background: linear-gradient(135deg, #f6fcfd 0%, #f2fbfb 25%, #eef8f9 60%, #d7ecef 100%);
     color: var(--color-dark);
     overflow: hidden;
 }
 
-/* .about-image-col {
-    position: relative;
-    min-height: 500px;
-    background: linear-gradient(135deg, #d4e8ea 0%, #b8d4d8 100%);
-    overflow: hidden;
-} */
+.about-text-col {
+}
 
 .about-image-col img {
     width: 100%;
@@ -422,7 +418,7 @@ html body *:not(.fi-icon):not(svg):not(svg *) {
 
 .stat-value {
     font-size: 2.5rem;
-    font-weight: 800;
+    font-weight: 700;
     color: var(--color-primary);
     line-height: 1;
 }
@@ -439,7 +435,7 @@ html body *:not(.fi-icon):not(svg):not(svg *) {
    ========================================================= */
 
 .products-section {
-    background: linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
+    background: radial-gradient(ellipse at 50% 0%, rgba(74, 194, 188, 0.12) 0%, rgba(255, 255, 255, 0) 70%), #ffffff;
     color: var(--color-dark);
 }
 
@@ -564,7 +560,7 @@ html body *:not(.fi-icon):not(svg):not(svg *) {
 
 .news-card-title {
     font-size: 1rem;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.3;
     margin-bottom: 0.5rem;
     color: var(--color-dark);
@@ -826,7 +822,7 @@ html body *:not(.fi-icon):not(svg):not(svg *) {
 .products-page-title {
     font-family: var(--font-sans);
     font-size: 2rem;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--color-primary);
@@ -928,6 +924,7 @@ html body *:not(.fi-icon):not(svg):not(svg *) {
 
 .home-featured-products .product-card:hover {
     background-color: var(--color-primary);
+    box-shadow: 0 20px 50px -10px rgba(74, 194, 188, 0.45);
 }
 
 .home-featured-products .product-card-name {
@@ -949,7 +946,7 @@ html body *:not(.fi-icon):not(svg):not(svg *) {
 .product-detail-page-title {
     font-family: var(--font-sans);
     font-size: 2rem;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--color-primary);
@@ -1052,7 +1049,7 @@ html body *:not(.fi-icon):not(svg):not(svg *) {
 .product-detail-title {
     font-family: var(--font-sans);
     font-size: 1.6rem;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: white;

@@ -52,7 +52,7 @@
                 </p>
             @endif -->
 
-            <h1 style="font-size:clamp(1.25rem, 3vw, 2rem); font-weight:800; color:white; line-height:1.2; margin-bottom:2rem;">
+            <h1 style="font-size:clamp(1.25rem, 3vw, 2rem); font-weight:700; color:white; line-height:1.2; margin-bottom:2rem;">
                 {{ $news->getTranslation('title', app()->getLocale()) }}
             </h1>
 

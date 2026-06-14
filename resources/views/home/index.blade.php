@@ -11,13 +11,13 @@
 <section class="hero-section" id="hero">
     <div style="width:100%; display:flex; align-items:flex-start; position:relative; z-index:2; padding-left:76px; padding-top:120px;">
         <div class="hero-content animate-fade-in-up">
-            <h1 class="heading-hero" style="color:white; margin-bottom:0.25rem; text-transform:uppercase;">
+            <h1 class="heading-hero" style="color:white; margin-bottom:0.25rem; text-transform:uppercase; white-space:nowrap;">
                 {{ __('messages.hero_title_1') }}
             </h1>
-            <h1 class="heading-hero" style="color:var(--color-primary); margin-bottom:0.25rem; text-transform:uppercase;">
+            <h1 class="heading-hero" style="color:var(--color-primary); margin-bottom:0.25rem; text-transform:uppercase; white-space:nowrap;">
                 {{ __('messages.hero_title_2') }}
             </h1>
-            <h1 class="heading-hero" style="color:white; margin-bottom:2rem; text-transform:uppercase;">
+            <h1 class="heading-hero" style="color:white; margin-bottom:2rem; text-transform:uppercase; white-space:nowrap;">
                 {{ __('messages.hero_title_3') }}
             </h1>
             <p style="font-size:0.95rem; color:rgba(255,255,255,0.6); max-width:420px; line-height:1.7; margin-bottom:2.5rem;">
@@ -69,9 +69,9 @@
         </div>
 
         {{-- Right: Text + Stats --}}
-        <div style="display:flex; flex-direction:column;  padding:4rem 4rem 0rem;">
+        <div class="about-text-col" style="display:flex; flex-direction:column;  padding:4rem 4rem 0rem;">
 
-            <p style="font-size:48px; font-weight:800; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-primary); margin-bottom:0.75rem;">
+            <p style="font-size:48px; font-weight:700; text-transform:uppercase; color:var(--color-primary); margin-bottom:0.75rem;">
                 {{ $aboutUs->getTranslation('title', app()->getLocale()) }}
             </p>
 

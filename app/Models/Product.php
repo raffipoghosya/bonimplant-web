@@ -55,12 +55,13 @@ class Product extends Model implements HasMedia
         $this->addMediaConversion('thumb')
             ->width(400)
             ->height(400)
-            ->sharpen(10)
+            ->keepOriginalImageFormat()
             ->performOnCollections('primary_image', 'gallery');
 
         $this->addMediaConversion('large')
             ->width(1200)
             ->height(900)
+            ->keepOriginalImageFormat()
             ->performOnCollections('primary_image', 'gallery');
     }
 

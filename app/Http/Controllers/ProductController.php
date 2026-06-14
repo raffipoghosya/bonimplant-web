@@ -98,6 +98,8 @@ class ProductController extends Controller
             })
             ->toArray();
 
-        return view('products.show', compact('product', 'categories', 'bodyParts', 'gallery', 'skeletonParts'));
+        return view('products.show', compact(
+            'product', 'categories', 'bodyParts', 'gallery', 'skeletonParts'
+        ));
     }
 }

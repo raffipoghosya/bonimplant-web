@@ -29,7 +29,7 @@ return [
     'footer_address'   => 'Yerevan, Sharav-Azbur 55a',
     'footer_phone'     => '+374 33 62 50 50',
     'footer_email'     => 'info@justartmed.com',
-    'footer_copyright' => 'Copyright ©2024',
+    'footer_copyright' => 'Copyright ©2026',
     'footer_design'    => 'Design by Yerevak',
 
     'products_page_title'  => 'Products',

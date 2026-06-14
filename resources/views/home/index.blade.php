@@ -112,7 +112,7 @@
             {{ __('messages.products_section') }}
         </h2>
 
-        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1.5rem; max-width:900px; margin:0 auto;">
+        <div class="home-featured-products" style="display:grid; grid-template-columns:repeat(3, 280px); gap:1.5rem; justify-content:center;">
 
             {{-- Orthopedics card --}}
             @php

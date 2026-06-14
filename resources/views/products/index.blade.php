@@ -11,11 +11,11 @@
      }">
 
     {{-- ===== SIDEBAR ===== --}}
-    <aside class="sidebar" style="width:240px; flex-shrink:0; padding:1.25rem 1rem; overflow-y:auto;">
+    <aside class="sidebar" style="width:300px; flex-shrink:0; padding:1.25rem 1rem; overflow-y:auto;">
 
         {{-- Search --}}
         <form method="GET" action="{{ route('products.index') }}" style="position:relative; margin-bottom:1rem;">
-            <svg style="position:absolute; left:0.625rem; top:50%; transform:translateY(-50%); width:14px; height:14px; color:rgba(255,255,255,0.35);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <svg style="position:absolute; left:0.625rem; top:50%; transform:translateY(-50%); width:14px; height:14px; color:var(--color-primary); opacity:0.5;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 15.803a7.5 7.5 0 0 0 10.607 0z"/>
             </svg>
             <input type="text" name="search"
@@ -33,13 +33,13 @@
                 @if($selectedCategory)
                     <a href="{{ route('products.index', array_merge(request()->except(['category']), [])) }}"
                        class="active-filter-chip">
-                        {{ $selectedCategory->getTranslation('name', app()->getLocale()) }} ×
+                        {{ $selectedCategory->getTranslation('name', app()->getLocale()) }} &times;
                     </a>
                 @endif
                 @if($selectedBodyPart)
                     <a href="{{ route('products.index', array_merge(request()->except(['body_part']), [])) }}"
                        class="active-filter-chip">
-                        {{ $selectedBodyPart->getTranslation('name', app()->getLocale()) }} ×
+                        {{ $selectedBodyPart->getTranslation('name', app()->getLocale()) }} &times;
                     </a>
                 @endif
             </div>
@@ -65,7 +65,6 @@
                         {{ $category->getTranslation('name', app()->getLocale()) }}
                     </label>
 
-                    {{-- Sub-categories --}}
                     @foreach($category->children as $child)
                         <label class="sidebar-checkbox-item" style="padding-left:1.25rem;">
                             <input type="checkbox"
@@ -79,7 +78,7 @@
         </div>
 
         {{-- Body Parts Accordion with Skeleton --}}
-        <div style="margin-top:0.5rem;">
+        <div style="margin-top:0.25rem;">
             <div class="sidebar-section-title" @click="openBodyParts = !openBodyParts">
                 <span>{{ __('messages.sidebar_body_parts') }}</span>
                 <svg :class="openBodyParts ? 'rotate-180' : ''"
@@ -90,13 +89,11 @@
             </div>
 
             <div x-show="openBodyParts" x-collapse>
-                {{-- Interactive Skeleton --}}
                 <div style="padding:1rem 0;">
                     @include('components.skeleton-body', ['skeletonParts' => $skeletonParts])
                 </div>
 
-                {{-- Body Part checkboxes --}}
-                <div style="margin-top:0.5rem;">
+                <div style="margin-top:0.25rem;">
                     @foreach($bodyParts as $bodyPart)
                         <label class="sidebar-checkbox-item">
                             <input type="checkbox"
@@ -114,55 +111,35 @@
     {{-- ===== MAIN CONTENT ===== --}}
     <div class="products-main" style="flex:1; padding:2rem 2.5rem; overflow-y:auto;">
 
-        {{-- Page heading --}}
-        <h1 class="heading-section" style="color:white; text-align:center; margin-bottom:2.5rem; font-size:2rem;">
-            {{ __('messages.products_page_title') }}
+        {{-- Dynamic page heading --}}
+        <h1 class="products-page-title">
+            @if($selectedBodyPart)
+                {{ $selectedBodyPart->getTranslation('name', app()->getLocale()) }}
+            @elseif($selectedCategory)
+                {{ $selectedCategory->getTranslation('name', app()->getLocale()) }}
+            @else
+                {{ __('messages.products_page_title') }}
+            @endif
         </h1>
-
-        <!-- {{-- Category cards grid --}}
-        @if(!request('category') && !request('body_part'))
-            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem; margin-bottom:2.5rem;">
-                @foreach($categories as $cat)
-                    <a href="{{ route('products.index', ['category' => $cat->id]) }}"
-                       class="product-category-card {{ request('category') == $cat->id ? 'active' : '' }}">
-                        @if($cat->icon_svg)
-                            <div style="margin-bottom:0.75rem; display:flex; justify-content:center;">
-                                <div style="width:60px; height:60px; color:rgba(255,255,255,0.8);">{!! $cat->icon_svg !!}</div>
-                            </div>
-                        @endif
-                        <div class="product-category-card-name">
-                            {{ $cat->getTranslation('name', app()->getLocale()) }}
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-            <div style="border-top:1px solid rgba(255,255,255,0.35); margin-bottom:2rem;"></div>
-        @endif -->
 
         {{-- Products grid --}}
         @if($products->count())
-            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:1rem;">
+            <div class="products-grid">
                 @foreach($products as $product)
-                    <a href="{{ route('products.show', $product->slug) }}" class="product-grid-card">
-                        <img src="{{ $product->getPrimaryThumbUrl() }}"
-                             alt="{{ $product->getTranslation('title', app()->getLocale()) }}"
-                             onerror="this.style.background='#1a3348'; this.src=''">
-                        <div class="product-grid-card-body">
-                            <div class="product-grid-card-name">
-                                {{ $product->getTranslation('title', app()->getLocale()) }}
-                            </div>
-                            @if($product->category)
-                                <div class="product-grid-card-cat">
-                                    {{ $product->category->getTranslation('name', app()->getLocale()) }}
-                                </div>
-                            @endif
+                    <a href="{{ route('products.show', $product->slug) }}" class="product-card">
+                        <div class="product-card-name">
+                            {{ $product->getTranslation('title', app()->getLocale()) }}
+                        </div>
+                        <div class="product-card-img">
+                            <img src="{{ $product->getPrimaryThumbUrl() }}"
+                                 alt="{{ $product->getTranslation('title', app()->getLocale()) }}">
                         </div>
                     </a>
                 @endforeach
             </div>
         @else
-            <div style="text-align:center; padding:4rem 0; color:rgba(255,255,255,0.35);">
-                <svg style="width:48px; height:48px; margin:0 auto 1rem; display:block;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+            <div class="products-empty">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 15.803a7.5 7.5 0 0 0 10.607 0Z"/>
                 </svg>
                 <p>{{ __('No products found.') }}</p>

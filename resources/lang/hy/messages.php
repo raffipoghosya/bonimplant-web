@@ -49,4 +49,9 @@ return [
     'lang_hy' => 'ՀԱՅ',
     'lang_ru' => 'ՌՈՒ',
     'lang_en' => 'ENG',
+
+    'zone_head' => 'Գլուխ / Պարանոց',
+    'zone_torso' => 'Իրան / Ողնաշար',
+    'zone_upper_limbs' => 'Վերին վերջույթներ',
+    'zone_lower_limbs' => 'Ստորին վերջույթներ',
 ];

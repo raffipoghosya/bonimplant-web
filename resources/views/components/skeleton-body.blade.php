@@ -1,5 +1,4 @@
 @props([
-    'activeZone'    => null,
     'skeletonParts' => [],   {{-- associative array keyed by svg_element_id --}}
 ])
 
@@ -115,111 +114,146 @@
          aria-hidden="true"
          focusable="false">
 
-        {{-- HEAD & NECK --}}
-        <polygon class="sk-zone" data-zone="head"
-            points="128,4 154,4 168,10 176,22 178,38 176,54 173,68 168,78 163,85
-                    156,92 152,100 150,112 148,120 134,120 132,112 130,100
-                    125,92 119,85 114,78 108,68 105,54 103,38 105,22 114,10"/>
+        {{-- ═══ JAW (unpaired) ═══ --}}
+        <polygon class="sk-zone" data-part="jaw"
+            points="125,82 157,82 163,90 160,100 155,108 148,114 134,114 127,108 122,100 119,90"/>
 
-        {{-- TORSO (clavicles → ribcage → spine → pelvis) --}}
-        <polygon class="sk-zone" data-zone="torso"
-            points="134,120 148,120 158,122 170,124 185,126 200,128 210,132
-                    218,140 220,155 218,175 214,200 210,225 208,250 208,275
-                    210,300 212,320 212,340 208,360 202,378 196,392 188,405
-                    180,412 170,415 155,418 141,418 127,415 118,412 110,405
-                    104,392 98,378 94,360 90,340 90,320 92,300 94,275 94,250
-                    92,225 88,200 84,175 82,155 84,140 92,132 100,128 115,126
-                    130,124 142,122"/>
+        {{-- ═══ CERVICAL SPINE (unpaired) ═══ --}}
+        <polygon class="sk-zone" data-part="cervical-spine"
+            points="134,114 148,114 150,120 150,168 132,168 132,120"/>
 
-        {{-- LEFT ARM (viewer's left = image left) --}}
-        <polygon class="sk-zone" data-zone="upper_limbs"
-            points="84,132 92,132 82,155 82,175 75,205 68,240 62,275 56,305
-                    52,330 48,355 44,380 40,405 36,428 30,448 24,465 18,478
-                    14,490 12,505 14,515 18,522 28,530 40,535 50,538 62,540
-                    72,538 80,534 84,528 82,518 78,508 74,498 72,488 74,475
-                    78,460 84,445 90,428 94,412 98,395 98,378 94,360 90,340
-                    90,320 92,300 94,275 92,250 88,225 84,200 84,175 82,155
-                    84,140"/>
+        {{-- ═══ CLAVICLE — left ═══ --}}
+        <polygon class="sk-zone" data-part="clavicle-l"
+            points="88,120 132,118 134,128 92,132"/>
+        {{-- ═══ CLAVICLE — right ═══ --}}
+        <polygon class="sk-zone" data-part="clavicle-r"
+            points="150,118 194,120 190,132 148,128"/>
 
-        {{-- RIGHT ARM (viewer's right = image right) --}}
-        <polygon class="sk-zone" data-zone="upper_limbs"
-            points="198,132 210,132 220,140 220,155 218,175 218,200 214,225
-                    210,250 188,275 196,305 202,330 208,355 214,380 222,405
-                    226,428 230,448 236,465 242,478 248,490 252,505 250,515
-                    246,522 240,530 230,535 218,538 206,540 196,538 188,534
-                    182,528 180,518 182,508 186,498 190,488 188,475 186,460
-                    182,445 178,428 172,412 168,395 166,378 166,360 168,340
-                    170,320 170,300 172,275 172,250 170,225 168,200 166,175
-                    166,155 168,140 178,132 188,126 200,128 210,132"/>
+        {{-- ═══ THORACIC SPINE (unpaired) ═══ --}}
+        <polygon class="sk-zone" data-part="thoracic-spine"
+            points="132,168 150,168 150,280 132,280"/>
 
-        {{-- LEFT LEG (viewer's left = image left) --}}
-        <polygon class="sk-zone" data-zone="lower_limbs"
-            points="118,415 141,418 145,425 146,440 144,458 140,478 136,500
-                    132,522 128,544 125,562 123,578 121,595 120,610 120,624
-                    121,638 122,650 122,662 120,675 118,688 116,700 112,712
-                    108,722 104,732 98,740 90,745 82,748 74,748 68,744 64,738
-                    60,730 58,718 60,706 64,694 70,682 76,670 80,658 82,646
-                    82,634 82,620 82,606 84,590 86,574 88,556 90,538 92,518
-                    94,498 96,478 98,458 99,440 98,425 96,418"/>
+        {{-- ═══ LUMBAR SPINE (unpaired) ═══ --}}
+        <polygon class="sk-zone" data-part="lumbar-spine"
+            points="130,280 152,280 154,362 128,362"/>
 
-        {{-- RIGHT LEG (viewer's right = image right) --}}
-        <polygon class="sk-zone" data-zone="lower_limbs"
-            points="141,418 164,415 183,418 184,425 183,440 182,458 180,478
-                    178,498 176,518 174,538 172,556 170,574 168,590 166,606
-                    166,620 166,634 168,646 170,658 172,670 176,682 182,694
-                    186,706 186,718 184,730 180,738 174,744 166,748 158,748
-                    150,745 142,740 136,730 132,720 128,710 124,700 122,688
-                    120,675 120,662 120,650 120,638 121,624 122,610 123,595
-                    124,578 126,562 128,544 130,522 132,500 134,478 136,458
-                    136,440 136,425 136,418"/>
+        {{-- ═══ SHOULDER JOINT — left ═══ --}}
+        <polygon class="sk-zone" data-part="shoulder-l"
+            points="74,126 92,132 84,142 82,160 68,150 66,136"/>
+        {{-- ═══ SHOULDER JOINT — right ═══ --}}
+        <polygon class="sk-zone" data-part="shoulder-r"
+            points="190,132 208,126 216,136 214,150 200,160 198,142"/>
+
+        {{-- ═══ HUMERUS — left ═══ --}}
+        <polygon class="sk-zone" data-part="humerus-l"
+            points="68,160 82,160 78,200 72,240 66,272 56,272 62,240 68,200"/>
+        {{-- ═══ HUMERUS — right ═══ --}}
+        <polygon class="sk-zone" data-part="humerus-r"
+            points="200,160 214,160 214,200 220,240 226,272 216,272 210,240 204,200"/>
+
+        {{-- ═══ ULNA — left ═══ --}}
+        <polygon class="sk-zone" data-part="ulna-l"
+            points="56,272 66,272 58,320 52,360 46,400 36,400 42,360 48,320"/>
+        {{-- ═══ ULNA — right ═══ --}}
+        <polygon class="sk-zone" data-part="ulna-r"
+            points="216,272 226,272 234,320 240,360 246,400 236,400 230,360 224,320"/>
+
+        {{-- ═══ RADIUS — left ═══ --}}
+        <polygon class="sk-zone" data-part="radius-l"
+            points="46,280 56,272 48,320 42,360 36,400 26,410 32,360 38,320"/>
+        {{-- ═══ RADIUS — right ═══ --}}
+        <polygon class="sk-zone" data-part="radius-r"
+            points="226,272 236,280 244,320 250,360 256,410 246,400 240,360 234,320"/>
+
+        {{-- ═══ HAND — left ═══ --}}
+        <polygon class="sk-zone" data-part="hand-l"
+            points="14,470 36,428 42,440 36,468 30,490 20,508 16,520
+                    26,530 42,536 56,540 68,536 78,530 82,520
+                    78,510 72,498 66,486 56,476 46,468 38,462 30,460"/>
+        {{-- ═══ HAND — right ═══ --}}
+        <polygon class="sk-zone" data-part="hand-r"
+            points="246,428 268,470 252,460 244,462 236,468 226,476
+                    216,486 210,498 204,510 200,520 204,530
+                    214,536 226,540 240,536 256,530 266,520
+                    262,508 252,490 246,468 240,440"/>
+
+        {{-- ═══ PELVIS — left ═══ --}}
+        <polygon class="sk-zone" data-part="pelvis-l"
+            points="96,362 140,362 140,390 136,406 128,416 116,420 104,416 96,406 92,390"/>
+        {{-- ═══ PELVIS — right ═══ --}}
+        <polygon class="sk-zone" data-part="pelvis-r"
+            points="142,362 186,362 190,390 186,406 178,416 166,420 154,416 146,406 142,390"/>
+
+        {{-- ═══ HIP JOINT — left ═══ --}}
+        <polygon class="sk-zone" data-part="hip-l"
+            points="108,416 132,416 136,430 134,444 126,448 112,448 106,444 104,430"/>
+        {{-- ═══ HIP JOINT — right ═══ --}}
+        <polygon class="sk-zone" data-part="hip-r"
+            points="150,416 174,416 178,430 176,444 170,448 156,448 150,444 148,430"/>
+
+        {{-- ═══ FEMUR — left ═══ --}}
+        <polygon class="sk-zone" data-part="femur-l"
+            points="106,448 132,448 130,490 128,530 124,570 120,590 108,590 104,570 102,530 100,490"/>
+        {{-- ═══ FEMUR — right ═══ --}}
+        <polygon class="sk-zone" data-part="femur-r"
+            points="150,448 176,448 182,490 180,530 178,570 174,590 162,590 158,570 154,530 152,490"/>
+
+        {{-- ═══ KNEE JOINT — left ═══ --}}
+        <polygon class="sk-zone" data-part="knee-l"
+            points="104,590 124,590 126,600 124,614 102,614 100,600"/>
+        {{-- ═══ KNEE JOINT — right ═══ --}}
+        <polygon class="sk-zone" data-part="knee-r"
+            points="158,590 178,590 180,600 178,614 160,614 156,600"/>
+
+        {{-- ═══ TIBIA — left ═══ --}}
+        <polygon class="sk-zone" data-part="tibia-l"
+            points="102,614 120,614 118,650 116,690 112,714 100,714 96,690 98,650"/>
+        {{-- ═══ TIBIA — right ═══ --}}
+        <polygon class="sk-zone" data-part="tibia-r"
+            points="162,614 180,614 184,650 186,690 182,714 170,714 166,690 164,650"/>
+
+        {{-- ═══ FIBULA — left ═══ --}}
+        <polygon class="sk-zone" data-part="fibula-l"
+            points="88,618 98,614 96,650 94,690 90,712 82,710 84,690 86,650"/>
+        {{-- ═══ FIBULA — right ═══ --}}
+        <polygon class="sk-zone" data-part="fibula-r"
+            points="184,614 194,618 196,650 198,690 200,710 192,712 188,690 186,650"/>
+
+        {{-- ═══ FOOT — left ═══ --}}
+        <polygon class="sk-zone" data-part="foot-l"
+            points="82,714 112,714 108,724 104,734 96,742 86,748 74,748
+                    66,744 62,738 60,728 62,718 68,714"/>
+        {{-- ═══ FOOT — right ═══ --}}
+        <polygon class="sk-zone" data-part="foot-r"
+            points="170,714 200,714 214,718 220,728 222,738 218,744
+                    210,748 196,748 186,742 178,734 174,724"/>
 
     </svg>
 </div>{{-- /.sk-canvas --}}
 
-{{-- ── Vanilla JS: tooltip driven entirely by DB data ── --}}
+{{-- ── Vanilla JS: tooltip & click filtering driven by DB data ── --}}
 <script>
 (function () {
-    // ── Data from DB: { 'svg_element_id': { name_hy: '...' }, ... }
-    // We also build a fallback map from data-zone → generic Armenian label
-    const PARTS   = @json($skeletonParts);
-    const ZONES   = {
-        head:         'Գլուխ / Պարանոց',
-        torso:        'Իրան / Ողնաշար',
-        upper_limbs:  'Վերին վերջույթներ',
-        lower_limbs:  'Ստորին վերջույթներ',
-    };
-
+    const PARTS = @json($skeletonParts);
     const root    = document.getElementById('{{ $uid }}');
     const tooltip = document.getElementById('{{ $uid }}-tooltip');
 
     if (!root || !tooltip) return;
 
-    const zones   = root.querySelectorAll('.sk-zone');
-    let   rafId   = null;
-    let   targetX = 0;
-    let   targetY = 0;
-
-    // ── Position tooltip near cursor (offset so it doesn't cover the bone)
     function positionTooltip(e) {
-        const x = e.clientX + 14;
-        const y = e.clientY - 38;
-        tooltip.style.left = x + 'px';
-        tooltip.style.top  = y + 'px';
+        tooltip.style.left = (e.clientX + 14) + 'px';
+        tooltip.style.top  = (e.clientY - 38) + 'px';
     }
 
-    // ── Show tooltip with a bone label
     function showTooltip(label, e) {
         tooltip.textContent = label;
         tooltip.style.display = 'block';
         positionTooltip(e);
-        // Trigger CSS fade-in on next frame
         requestAnimationFrame(() => tooltip.classList.add('visible'));
     }
 
-    // ── Hide tooltip
     function hideTooltip() {
         tooltip.classList.remove('visible');
-        // Wait for fade-out before hiding
         setTimeout(() => {
             if (!tooltip.classList.contains('visible')) {
                 tooltip.style.display = 'none';
@@ -227,56 +261,24 @@
         }, 160);
     }
 
-    // ── Attach listeners to each polygon zone
-    zones.forEach(zone => {
-        const zoneKey = zone.dataset.zone; // e.g. 'head', 'torso', ...
+    root.querySelectorAll('.sk-zone').forEach(zone => {
+        const partId = zone.dataset.part;
+        if (!partId || !PARTS[partId]) return;
 
-        zone.addEventListener('mouseenter', function (e) {
-            // 1. Try to match by svg_element_id if zone has a data-part attr
-            const partId = zone.dataset.part;
-            let label    = null;
+        const data = PARTS[partId];
 
-            if (partId && PARTS[partId]) {
-                label = PARTS[partId].name_hy;
-            }
-
-            // 2. Fallback to zone-level generic label
-            if (!label && zoneKey && ZONES[zoneKey]) {
-                label = ZONES[zoneKey];
-            }
-
-            if (label) showTooltip(label, e);
-        });
-
+        zone.addEventListener('mouseenter', e => showTooltip(data.name, e));
         zone.addEventListener('mousemove', positionTooltip);
-
         zone.addEventListener('mouseleave', hideTooltip);
-
-        // ── Click: dispatch zone-clicked for parent Alpine to handle filtering
         zone.addEventListener('click', function () {
-            if (zoneKey) {
-                zone.dispatchEvent(new CustomEvent('zone-clicked', {
-                    detail: zoneKey,
-                    bubbles: true,
-                    composed: true,
-                }));
+            if (data.body_part_id) {
+                const url = new URL(window.location.href);
+                url.pathname = '{{ route("products.index") }}'.replace(window.location.origin, '');
+                url.searchParams.set('body_part', data.body_part_id);
+                window.location.href = url.toString();
             }
         });
     });
-
-    // ── Also listen on individual named elements inside the SVG image
-    // (for when allbody.svg is eventually replaced with a proper inline SVG)
-    // This hooks on any element that has an id matching a PARTS key.
-    root.querySelectorAll('[id]').forEach(el => {
-        const id = el.id;
-        if (PARTS[id]) {
-            el.style.cursor = 'pointer';
-            el.addEventListener('mouseenter', e => showTooltip(PARTS[id].name_hy, e));
-            el.addEventListener('mousemove',  positionTooltip);
-            el.addEventListener('mouseleave', hideTooltip);
-        }
-    });
-
 })();
 </script>
 

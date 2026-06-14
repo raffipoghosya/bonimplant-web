@@ -73,7 +73,26 @@ class ProductResource extends Resource
                 ]),
 
             Section::make('Details')
+                ->schema([
+                    Forms\Components\Select::make('bodyParts')
+                        ->label('Body Parts')
+                        ->relationship('bodyParts', 'name')
+                        ->multiple()
+                        ->options(fn () => BodyPart::where('is_active', true)
+                            ->orderBy('sort_order')
+                            ->get()
+                            ->mapWithKeys(fn ($bp) => [$bp->id => $bp->getTranslation('name', app()->getLocale()) ?: $bp->getTranslation('name', 'en')])
+                            ->toArray()
+                        )
+                        ->searchable()
+                        ->preload()
+                        ->native(false)
+                        ->columnSpanFull(),
+                ]),
+
+            Section::make('Settings')
                 ->columns(2)
+                ->collapsed()
                 ->schema([
                     Forms\Components\TextInput::make('slug')
                         ->label('Slug')
@@ -83,12 +102,8 @@ class ProductResource extends Resource
                         ->label('Category')
                         ->options(fn () => Category::all()->pluck('name', 'id'))
                         ->searchable()
-                        ->preload(),
-                    Forms\Components\Select::make('body_part_id')
-                        ->label('Body Part')
-                        ->options(fn () => BodyPart::all()->pluck('name', 'id'))
-                        ->searchable()
-                        ->preload(),
+                        ->preload()
+                        ->native(false),
                     Forms\Components\Toggle::make('is_featured')
                         ->label('Featured')
                         ->default(false),
@@ -153,9 +168,9 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Category')
                     ->formatStateUsing(fn ($record) => $record->category?->getTranslation('name', 'en') ?? '—'),
-                Tables\Columns\TextColumn::make('bodyPart.name')
-                    ->label('Body Part')
-                    ->formatStateUsing(fn ($record) => $record->bodyPart?->getTranslation('name', 'en') ?? '—'),
+                Tables\Columns\TextColumn::make('bodyParts.name')
+                    ->label('Body Parts')
+                    ->formatStateUsing(fn ($record) => $record->bodyParts->map(fn ($bp) => $bp->getTranslation('name', 'en'))->join(', ') ?: '—'),
                 Tables\Columns\IconColumn::make('is_featured')
                     ->boolean()
                     ->label('Featured'),

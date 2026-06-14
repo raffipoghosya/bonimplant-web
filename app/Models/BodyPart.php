@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Translatable\HasTranslations;
 
 class BodyPart extends Model
@@ -14,6 +14,8 @@ class BodyPart extends Model
         'name',
         'slug',
         'skeleton_zone',
+        'is_paired',
+        'svg_element_ids',
         'sort_order',
         'is_active',
     ];
@@ -22,11 +24,13 @@ class BodyPart extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
+        'is_paired' => 'boolean',
+        'svg_element_ids' => 'array',
     ];
 
-    public function products(): HasMany
+    public function products(): BelongsToMany
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class);
     }
 
     public function getRouteKeyName(): string

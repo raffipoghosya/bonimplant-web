@@ -58,13 +58,13 @@
             </div>
             <div x-show="openBodyParts" x-collapse>
                 <div style="padding:1rem 0;">
-                    @include('components.skeleton-body', ['activeZone' => $product->bodyPart?->skeleton_zone, 'skeletonParts' => $skeletonParts])
+                    @include('components.skeleton-body', ['skeletonParts' => $skeletonParts])
                 </div>
                 @foreach($bodyParts as $bodyPart)
                     <label class="sidebar-checkbox-item">
                         <input type="checkbox"
                                onchange="window.location.href='{{ route('products.index', ['body_part' => $bodyPart->id]) }}'"
-                               {{ $product->body_part_id == $bodyPart->id ? 'checked' : '' }}>
+                               {{ $product->bodyParts->contains($bodyPart->id) ? 'checked' : '' }}>
                         {{ $bodyPart->getTranslation('name', app()->getLocale()) }}
                     </label>
                 @endforeach
@@ -139,8 +139,8 @@
         @if($product->category)
             <p style="font-size:0.75rem; color:var(--color-primary); font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1.5rem;">
                 {{ $product->category->getTranslation('name', app()->getLocale()) }}
-                @if($product->bodyPart)
-                    · {{ $product->bodyPart->getTranslation('name', app()->getLocale()) }}
+                @if($product->bodyParts->isNotEmpty())
+                    · {{ $product->bodyParts->map(fn ($bp) => $bp->getTranslation('name', app()->getLocale()))->join(', ') }}
                 @endif
             </p>
         @endif

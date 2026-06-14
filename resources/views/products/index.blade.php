@@ -8,20 +8,7 @@
      x-data="{
          openCategory: true,
          openBodyParts: true,
-         openBrand: false,
-         activeZone: '{{ request('zone') }}',
-         handleZone(zone) {
-             this.activeZone = this.activeZone === zone ? null : zone;
-             const url = new URL(window.location.href);
-             if (this.activeZone) {
-                 url.searchParams.set('zone', this.activeZone);
-             } else {
-                 url.searchParams.delete('zone');
-             }
-             window.location.href = url.toString();
-         }
-     }"
-     @zone-clicked.window="handleZone($event.detail)">
+     }">
 
     {{-- ===== SIDEBAR ===== --}}
     <aside class="sidebar" style="width:240px; flex-shrink:0; padding:1.25rem 1rem; overflow-y:auto;">
@@ -41,7 +28,7 @@
         </form>
 
         {{-- Active filter chips --}}
-        @if(request('category') || request('body_part') || request('zone'))
+        @if(request('category') || request('body_part'))
             <div style="display:flex; flex-wrap:wrap; gap:0.35rem; margin-bottom:1rem;">
                 @if($selectedCategory)
                     <a href="{{ route('products.index', array_merge(request()->except(['category']), [])) }}"
@@ -105,7 +92,7 @@
             <div x-show="openBodyParts" x-collapse>
                 {{-- Interactive Skeleton --}}
                 <div style="padding:1rem 0;">
-                    @include('components.skeleton-body', ['activeZone' => request('zone'), 'skeletonParts' => $skeletonParts])
+                    @include('components.skeleton-body', ['skeletonParts' => $skeletonParts])
                 </div>
 
                 {{-- Body Part checkboxes --}}

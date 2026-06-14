@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -18,7 +19,6 @@ class Product extends Model implements HasMedia
         'description',
         'slug',
         'category_id',
-        'body_part_id',
         'is_featured',
         'is_active',
         'sort_order',
@@ -36,9 +36,9 @@ class Product extends Model implements HasMedia
         return $this->belongsTo(Category::class);
     }
 
-    public function bodyPart(): BelongsTo
+    public function bodyParts(): BelongsToMany
     {
-        return $this->belongsTo(BodyPart::class);
+        return $this->belongsToMany(BodyPart::class);
     }
 
     public function registerMediaCollections(): void

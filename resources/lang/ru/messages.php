@@ -45,4 +45,9 @@ return [
     'lang_hy' => 'ՀԱՅ',
     'lang_ru' => 'РУС',
     'lang_en' => 'ENG',
+
+    'zone_head' => 'Голова / Шея',
+    'zone_torso' => 'Туловище / Позвоночник',
+    'zone_upper_limbs' => 'Верхние конечности',
+    'zone_lower_limbs' => 'Нижние конечности',
 ];

@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         // ── Categories ──────────────────────────────────────────────
         $orthopedics = Category::create([
-            'name'       => ['hy' => 'Ортопедиа', 'ru' => 'Ортопедия', 'en' => 'Orthopedics'],
+            'name'       => ['hy' => 'Օրթոպեդիա', 'ru' => 'Ортопедия', 'en' => 'Orthopedics'],
             'slug'       => 'orthopedics',
             'type'       => 'orthopedics',
             'sort_order' => 1,
@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $traumatology = Category::create([
-            'name'       => ['hy' => 'Վnasvanqabanutyun', 'ru' => 'Травматология', 'en' => 'Traumatology'],
+            'name'       => ['hy' => 'Վնասաբանություն', 'ru' => 'Травматология', 'en' => 'Traumatology'],
             'slug'       => 'traumatology',
             'type'       => 'traumatology',
             'sort_order' => 2,
@@ -32,16 +32,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $instruments = Category::create([
-            'name'       => ['hy' => 'Gortsiqner', 'ru' => 'Инструменты', 'en' => 'Instruments'],
+            'name'       => ['hy' => 'Գործիքներ', 'ru' => 'Инструменты', 'en' => 'Instruments'],
             'slug'       => 'instruments',
             'type'       => 'instruments',
             'sort_order' => 3,
             'icon_svg'   => null,
         ]);
 
-        // Sub-categories
         Category::create([
-            'name'       => ['hy' => 'Ոտnayin Hamarasharchutyun', 'ru' => 'Система коленного сустава', 'en' => 'Knee Joint System'],
+            'name'       => ['hy' => 'Ծնկան հոդի համակարգ', 'ru' => 'Система коленного сустава', 'en' => 'Knee Joint System'],
             'slug'       => 'knee-joint',
             'type'       => 'orthopedics',
             'parent_id'  => $orthopedics->id,
@@ -49,7 +48,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Category::create([
-            'name'       => ['hy' => 'Կnkayin Hamarasharchutyun', 'ru' => 'Система тазобедренного сустава', 'en' => 'Hip Joint System'],
+            'name'       => ['hy' => 'Կոնքազդրային հոդի համակարգ', 'ru' => 'Система тазобедренного сустава', 'en' => 'Hip Joint System'],
             'slug'       => 'hip-joint',
             'type'       => 'orthopedics',
             'parent_id'  => $orthopedics->id,
@@ -57,111 +56,95 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Category::create([
-            'name'       => ['hy' => 'Nnkaragits Plitaner', 'ru' => 'Костные пластины', 'en' => 'Bone Plates'],
+            'name'       => ['hy' => 'Ոսկրի թիթեղներ', 'ru' => 'Костные пластины', 'en' => 'Bone Plates'],
             'slug'       => 'bone-plates',
             'type'       => 'traumatology',
             'parent_id'  => $traumatology->id,
             'sort_order' => 1,
         ]);
 
-        // ── Body Parts ───────────────────────────────────────────────
-        $bodyParts = [
-            ['name' => ['hy' => 'Gndar / Vizi', 'ru' => 'Голова / шея', 'en' => 'Head / Neck'],   'slug' => 'head',        'skeleton_zone' => 'head',        'sort_order' => 1],
-            ['name' => ['hy' => 'Qnut / Ogi stura', 'ru' => 'Туловище', 'en' => 'Torso'],          'slug' => 'torso',       'skeleton_zone' => 'torso',       'sort_order' => 2],
-            ['name' => ['hy' => 'Veriny Verjabzhutyun', 'ru' => 'Верхние конечности', 'en' => 'Upper Limbs'], 'slug' => 'upper-limbs', 'skeleton_zone' => 'upper_limbs', 'sort_order' => 3],
-            ['name' => ['hy' => 'Nerkin Verjabzhutyun', 'ru' => 'Нижние конечности', 'en' => 'Lower Limbs'],  'slug' => 'lower-limbs', 'skeleton_zone' => 'lower_limbs', 'sort_order' => 4],
+        // ── Body Parts (17 bones from translation dictionary) ──────
+        $bodyPartsData = [
+            ['name' => ['hy' => 'Ծնոտ', 'ru' => 'Челюсть', 'en' => 'Jaw'], 'slug' => 'jaw', 'skeleton_zone' => 'head', 'is_paired' => false, 'svg_element_ids' => ['челюсть'], 'sort_order' => 1],
+            ['name' => ['hy' => 'Պարանոցային հատված', 'ru' => 'Шейный отдел позвоночника', 'en' => 'Cervical spine'], 'slug' => 'cervical-spine', 'skeleton_zone' => 'torso', 'is_paired' => false, 'svg_element_ids' => ['шейный отдел позвоночника'], 'sort_order' => 2],
+            ['name' => ['hy' => 'Կրծքային հատված', 'ru' => 'Грудной отдел позвоночника', 'en' => 'Thoracic spine'], 'slug' => 'thoracic-spine', 'skeleton_zone' => 'torso', 'is_paired' => false, 'svg_element_ids' => ['грудной отдел позвоночника'], 'sort_order' => 3],
+            ['name' => ['hy' => 'Գոտկային հատված', 'ru' => 'Поясничный отдел позвоночника', 'en' => 'Lumbar spine'], 'slug' => 'lumbar-spine', 'skeleton_zone' => 'torso', 'is_paired' => false, 'svg_element_ids' => ['поясничный отдел позвоночника'], 'sort_order' => 4],
+            ['name' => ['hy' => 'Անրակ', 'ru' => 'Ключица', 'en' => 'Clavicle'], 'slug' => 'clavicle', 'skeleton_zone' => 'upper_limbs', 'is_paired' => true, 'svg_element_ids' => ['ключица1', 'ключица2'], 'sort_order' => 5],
+            ['name' => ['hy' => 'Ուսահոդ', 'ru' => 'Плечевой сустав', 'en' => 'Shoulder joint'], 'slug' => 'shoulder-joint', 'skeleton_zone' => 'upper_limbs', 'is_paired' => true, 'svg_element_ids' => [], 'sort_order' => 6],
+            ['name' => ['hy' => 'Բազկոսկր', 'ru' => 'Плечевая кость', 'en' => 'Humerus'], 'slug' => 'humerus', 'skeleton_zone' => 'upper_limbs', 'is_paired' => true, 'svg_element_ids' => ['плечевая кость', 'плечевая кость-1'], 'sort_order' => 7],
+            ['name' => ['hy' => 'Ծղիկոսկր', 'ru' => 'Локтевая кость', 'en' => 'Ulna'], 'slug' => 'ulna', 'skeleton_zone' => 'upper_limbs', 'is_paired' => true, 'svg_element_ids' => ['локтевая кость1', 'локтевая кость2'], 'sort_order' => 8],
+            ['name' => ['hy' => 'Ճաճանչոսկր', 'ru' => 'Лучевая кость', 'en' => 'Radius'], 'slug' => 'radius', 'skeleton_zone' => 'upper_limbs', 'is_paired' => true, 'svg_element_ids' => [], 'sort_order' => 9],
+            ['name' => ['hy' => 'Դաստակ', 'ru' => 'Кисть', 'en' => 'Hand'], 'slug' => 'hand', 'skeleton_zone' => 'upper_limbs', 'is_paired' => true, 'svg_element_ids' => ['кисть1', 'кисть2'], 'sort_order' => 10],
+            ['name' => ['hy' => 'Կոնք', 'ru' => 'Таз', 'en' => 'Pelvis'], 'slug' => 'pelvis', 'skeleton_zone' => 'lower_limbs', 'is_paired' => true, 'svg_element_ids' => ['таз1', 'таз2'], 'sort_order' => 11],
+            ['name' => ['hy' => 'Կոնքազդրային հոդ', 'ru' => 'Тазобедренный сустав', 'en' => 'Hip joint'], 'slug' => 'hip-joint-bone', 'skeleton_zone' => 'lower_limbs', 'is_paired' => true, 'svg_element_ids' => [], 'sort_order' => 12],
+            ['name' => ['hy' => 'Ազդրոսկր', 'ru' => 'Бедренная кость', 'en' => 'Femur'], 'slug' => 'femur', 'skeleton_zone' => 'lower_limbs', 'is_paired' => true, 'svg_element_ids' => ['бедренная кость1', 'бедренная кость2'], 'sort_order' => 13],
+            ['name' => ['hy' => 'Ծնկան հոդ', 'ru' => 'Коленный сустав', 'en' => 'Knee joint'], 'slug' => 'knee-joint-bone', 'skeleton_zone' => 'lower_limbs', 'is_paired' => true, 'svg_element_ids' => ['коленный сустав1', 'коленный сустав2'], 'sort_order' => 14],
+            ['name' => ['hy' => 'Ոլոք', 'ru' => 'Большеберцовая кость', 'en' => 'Tibia'], 'slug' => 'tibia', 'skeleton_zone' => 'lower_limbs', 'is_paired' => true, 'svg_element_ids' => ['большеберцовая кость1', 'большеберцовая кость2'], 'sort_order' => 15],
+            ['name' => ['hy' => 'Նրբոլոք', 'ru' => 'Малоберцовая кость', 'en' => 'Fibula'], 'slug' => 'fibula', 'skeleton_zone' => 'lower_limbs', 'is_paired' => true, 'svg_element_ids' => [], 'sort_order' => 16],
+            ['name' => ['hy' => 'Ոտնաթաթ', 'ru' => 'Стопа', 'en' => 'Foot'], 'slug' => 'foot', 'skeleton_zone' => 'lower_limbs', 'is_paired' => true, 'svg_element_ids' => ['стопа1', 'стопа2'], 'sort_order' => 17],
         ];
 
-        foreach ($bodyParts as $bp) {
+        foreach ($bodyPartsData as $bp) {
             BodyPart::create($bp);
         }
 
-        $lowerLimbs = BodyPart::where('slug', 'lower-limbs')->first();
-        $upperLimbs = BodyPart::where('slug', 'upper-limbs')->first();
-        $torso      = BodyPart::where('slug', 'torso')->first();
+        $hipJoint   = BodyPart::where('slug', 'hip-joint-bone')->first();
+        $kneeJoint  = BodyPart::where('slug', 'knee-joint-bone')->first();
+        $humerus    = BodyPart::where('slug', 'humerus')->first();
+        $thoracic   = BodyPart::where('slug', 'thoracic-spine')->first();
 
-        // ── About Us ─────────────────────────────────────────────────
+        // ── About Us ─────────────────────────────────────────────
         AboutUs::firstOrCreate(['id' => 1], [
-            'title'       => ['hy' => 'Մեr Mashin', 'ru' => 'О нас', 'en' => 'About Us'],
+            'title'       => ['hy' => 'Մեր մասին', 'ru' => 'О нас', 'en' => 'About Us'],
             'subtitle'    => [
-                'hy' => 'Մenk Sahmannum Enk Oraki Nor Chafanishner',
+                'hy' => 'Մենք սահմանում ենք որակի նոր չափանիշներ',
                 'ru' => 'Мы устанавливаем новые стандарты качества',
                 'en' => 'We Set New Standards of Quality',
             ],
             'description' => [
-                'hy' => '<p>Мer yntkerуtyune himnadrvел е mek navatakvi matutsel parzrkakvarg vaztnuvanits hamakvargter, orronk khamamatenden zamanakakits dikayne u anabtelakovni amnrutyune. Menk ogtnagordnum enk miayn lavakovi nyutere u zamanakakits tekhniologhiayner.</p><p>Мer yntkerуtyune himnadrvел е mek navatakvi matutsel parzrkakvarg vaztnuvanits hamakvargter, orronk khamamatenden zamanakakits dikayne u anabtelakovni amnrutyune.</p>',
-                'ru' => '<p>Наша компания основана с целью предоставить хирургам высококачественных партнёров, которые соответствуют современному дизайну и безопасности. Мы используем только лучшие материалы и современные технологии.</p><p>Наша компания основана с целью предоставить хирургам высококачественных партнёров, которые соответствуют современному дизайну и безопасности.</p>',
-                'en' => '<p>Our company was founded to provide surgeons with high-quality implant partners that meet modern design and safety standards. We use only the finest materials and cutting-edge technologies.</p><p>Our company was founded to provide surgeons with high-quality implant partners that meet modern design and safety standards.</p>',
+                'hy' => '<p>Մեր ընկերությունը հիմնադրված է մատուցել բարձրակարգ իմպլանտներ։</p>',
+                'ru' => '<p>Наша компания основана с целью предоставить хирургам высококачественные имплантаты.</p>',
+                'en' => '<p>Our company was founded to provide surgeons with high-quality implant partners.</p>',
             ],
             'stat1_value' => '50+',
-            'stat1_label' => ['hy' => 'Апранкнер', 'ru' => 'Продуктов', 'en' => 'Products'],
+            'stat1_label' => ['hy' => 'Ապրանքներ', 'ru' => 'Продуктов', 'en' => 'Products'],
             'stat2_value' => '40+',
-            'stat2_label' => ['hy' => 'Гортшнкалнер', 'ru' => 'Партнёров', 'en' => 'Partners'],
+            'stat2_label' => ['hy' => 'Գործընկերներ', 'ru' => 'Партнёров', 'en' => 'Partners'],
             'stat3_value' => '250+',
-            'stat3_label' => ['hy' => 'Хачорхортнер', 'ru' => 'Клиентов', 'en' => 'Clients'],
+            'stat3_label' => ['hy' => 'Հաճախорդներ', 'ru' => 'Клиентов', 'en' => 'Clients'],
         ]);
 
-        // ── News ──────────────────────────────────────────────────────
+        // ── News ──────────────────────────────────────────────────
         $newsData = [
             [
-                'title'             => ['hy' => 'Ускнрайн Импланtner', 'ru' => 'Костные имплантаты', 'en' => 'Bone Implants'],
+                'title'             => ['hy' => 'Ոսկրային իմպլանտներ', 'ru' => 'Костные имплантаты', 'en' => 'Bone Implants'],
                 'short_description' => [
-                    'hy' => 'Инновационные лнот-иmnер, Дтер нуkрayhn annnnutyun вернканgннman hamar.',
-                    'ru' => 'Инновационные решения Дтер нуkрayhn annnnutyun вернканgнман гамар.',
+                    'hy' => 'Նորարարական լուծումներ ոսկրային վերականգման համար.',
+                    'ru' => 'Инновационные решения для восстановления костей.',
                     'en' => 'Innovative solutions for your bone recovery and rehabilitation.',
                 ],
                 'description' => [
-                    'hy' => '<p>Мer navatakvi noot-imer yev orthopaedic lnutner nerakayvum en medicinayi amboghjakan pahanjnavor tuylerin. Mez gntir nkati mez khmbutyan mashi, vori mej asume en ardyunakutyun, khakutyun yev angutyun.</p>',
-                    'ru' => '<p>Наши инновационные изделия и ортопедические решения соответствуют полным медицинским требованиям. Обратите внимание на наши материалы, в которых гарантируется эффективность, качество и безопасность.</p>',
-                    'en' => '<p>Our innovative products and orthopedic solutions meet full medical requirements. Pay attention to our materials, which guarantee effectiveness, quality and safety.</p>',
+                    'hy' => '<p>Մեր նորարարական արտադրանքները համապատասխանում են բժշկական պահանջներին.</p>',
+                    'ru' => '<p>Наши инновационные изделия соответствуют медицинским требованиям.</p>',
+                    'en' => '<p>Our innovative products meet full medical requirements.</p>',
                 ],
                 'slug'         => 'bone-implants-' . Str::random(4),
                 'published_at' => now()->subDays(2),
             ],
             [
-                'title'             => ['hy' => 'Noor Ordiners', 'ru' => 'Новые продукты', 'en' => 'New Products'],
+                'title'             => ['hy' => 'Նոր արտադրանքներ', 'ru' => 'Новые продукты', 'en' => 'New Products'],
                 'short_description' => [
-                    'hy' => 'Мы рады представить наши новейшие имплантаты для лечения переломов.',
-                    'ru' => 'Мы рады представить наши новейшие имплантаты для лечения переломов.',
-                    'en' => 'We are pleased to introduce our newest implants for fracture treatment.',
+                    'hy' => 'Ներկայացնում ենք մեր նոր իմպլանտները.',
+                    'ru' => 'Мы рады представить наши новейшие имплантаты.',
+                    'en' => 'We are pleased to introduce our newest implants.',
                 ],
                 'description' => [
-                    'hy' => '<p>Подробное описание новых продуктов на армянском языке.</p>',
-                    'ru' => '<p>Подробное описание новых продуктов на русском языке. Наши имплантаты производятся по стандартам ISO.</p>',
-                    'en' => '<p>Detailed description of new products in English. Our implants are manufactured to ISO standards.</p>',
+                    'hy' => '<p>Մեր իմպլանտները արտադրվում են ISO ստանդարտներին համապատասխան.</p>',
+                    'ru' => '<p>Наши имплантаты производятся по стандартам ISO.</p>',
+                    'en' => '<p>Our implants are manufactured to ISO standards.</p>',
                 ],
                 'slug'         => 'new-products-' . Str::random(4),
                 'published_at' => now()->subDays(7),
-            ],
-            [
-                'title'             => ['hy' => 'Медицинские инновации', 'ru' => 'Медицинские инновации', 'en' => 'Medical Innovations'],
-                'short_description' => [
-                    'hy' => 'BonImplant выходит на международный рынок с новой линейкой продуктов.',
-                    'ru' => 'BonImplant выходит на международный рынок с новой линейкой продуктов.',
-                    'en' => 'BonImplant enters the international market with a new product line.',
-                ],
-                'description' => [
-                    'hy' => '<p>Armeniayum artvadrvats BonImplant entanike artak e nerkayacnum international shukayum.</p>',
-                    'ru' => '<p>Армянская компания BonImplant выходит на международный рынок.</p>',
-                    'en' => '<p>Armenian company BonImplant enters the international market.</p>',
-                ],
-                'slug'         => 'medical-innovations-' . Str::random(4),
-                'published_at' => now()->subDays(14),
-            ],
-            [
-                'title'             => ['hy' => 'ISO Certification', 'ru' => 'Сертификация ISO', 'en' => 'ISO Certification'],
-                'short_description' => [
-                    'hy' => 'BonImplant получил сертификат ISO 13485 для медицинских изделий.',
-                    'ru' => 'BonImplant получил сертификат ISO 13485 для медицинских изделий.',
-                    'en' => 'BonImplant has received ISO 13485 certification for medical devices.',
-                ],
-                'description' => [
-                    'hy' => '<p>ISO 13485 сертификать ստացել ենք, ինку хватет на alnagitskova stugel tarber.</p>',
-                    'ru' => '<p>Получение сертификата ISO 13485 подтверждает наше стремление к качеству и безопасности.</p>',
-                    'en' => '<p>Receiving ISO 13485 certification confirms our commitment to quality and safety.</p>',
-                ],
-                'slug'         => 'iso-certification-' . Str::random(4),
-                'published_at' => now()->subDays(21),
             ],
         ];
 
@@ -169,91 +152,96 @@ class DatabaseSeeder extends Seeder
             News::create($data);
         }
 
-        // ── Products ──────────────────────────────────────────────────
+        // ── Products ────────────────────────────────────────────────
         $productsData = [
             [
-                'title'       => ['hy' => 'Կnkayin Hamarasharchutyun Hip Joint', 'ru' => 'Система тазобедренного сустава', 'en' => 'Hip Joint System'],
+                'title'       => ['hy' => 'Կոնքազդրային հոդի համակարգ', 'ru' => 'Система тазобедренного сустава', 'en' => 'Hip Joint System'],
                 'description' => [
-                    'hy' => '<p>Мer navatakvi nnkayin hamarasharchутyune nakhagtsats e tarberim verkangnman armenarkhnoots hamar.</p>',
-                    'ru' => '<p>Наша инновационная система тазобедренного сустава разработана для сложных реконструктивных операций.</p>',
-                    'en' => '<p>Our innovative hip joint system is designed for complex reconstructive surgeries.</p>',
+                    'hy' => '<p>Մեր կոնքազդրային հոդի համակարգը նախագծված է բարդ վիրահատությունների համար:</p>',
+                    'ru' => '<p>Наша система тазобедренного сустава для реконструктивных операций.</p>',
+                    'en' => '<p>Our hip joint system is designed for complex reconstructive surgeries.</p>',
                 ],
                 'slug'        => 'hip-joint-system',
                 'category_id' => $orthopedics->id,
-                'body_part_id'=> $lowerLimbs?->id,
                 'is_featured' => true,
+                '_body_parts' => [$hipJoint?->id, $kneeJoint?->id],
             ],
             [
-                'title'       => ['hy' => 'Tnkain Jon System', 'ru' => 'Система коленного сустава', 'en' => 'Knee Joint System'],
+                'title'       => ['hy' => 'Ծնկան հոդի համակարգ', 'ru' => 'Система коленного сустава', 'en' => 'Knee Joint System'],
                 'description' => [
-                    'hy' => '<p>Мer tnkain jon sistemane navtntsum e mek khimatvakan endgrunelutyan.</p>',
-                    'ru' => '<p>Наша система коленного сустава обеспечивает долгосрочную надёжность.</p>',
-                    'en' => '<p>Our knee joint system provides long-term reliability and natural movement.</p>',
+                    'hy' => '<p>Մեր ծնկան հոդի համակարգը ապահովում է երկարաժամկետ հուսալիություն:</p>',
+                    'ru' => '<p>Наша система коленного сустава обеспечивает надёжность.</p>',
+                    'en' => '<p>Our knee joint system provides long-term reliability.</p>',
                 ],
                 'slug'        => 'knee-joint-system',
                 'category_id' => $orthopedics->id,
-                'body_part_id'=> $lowerLimbs?->id,
                 'is_featured' => true,
+                '_body_parts' => [$kneeJoint?->id],
             ],
             [
-                'title'       => ['hy' => 'Nnkar Plita', 'ru' => 'Костная пластина', 'en' => 'Bone Plate'],
+                'title'       => ['hy' => 'Ոսկրի թիթեղնակ', 'ru' => 'Костная пластина', 'en' => 'Bone Plate'],
                 'description' => [
-                    'hy' => '<p>Мер nkar plitaner nakhagtsats en vorojayner khavaqvel.</p>',
-                    'ru' => '<p>Наши костные пластины разработаны для стабилизации переломов.</p>',
+                    'hy' => '<p>Մեր ոսկրի թիթեղնակները կոտրվածքների կայունացման համար:</p>',
+                    'ru' => '<p>Наши костные пластины для стабилизации переломов.</p>',
                     'en' => '<p>Our bone plates are designed for fracture stabilization.</p>',
                 ],
                 'slug'        => 'bone-plate',
                 'category_id' => $traumatology->id,
-                'body_part_id'=> $upperLimbs?->id,
                 'is_featured' => true,
+                '_body_parts' => [$humerus?->id],
             ],
             [
-                'title'       => ['hy' => 'Nnkar Shur', 'ru' => 'Костный винт', 'en' => 'Bone Screw'],
+                'title'       => ['hy' => 'Ոսկրի պտուրակ', 'ru' => 'Костный винт', 'en' => 'Bone Screw'],
                 'description' => [
-                    'hy' => '<p>Мер nnkar shurner nemashkharhin haytnvats en.</p>',
+                    'hy' => '<p>Մեր պտուրակները համապատասխանում են միջազգային ստանդարտներին:</p>',
                     'ru' => '<p>Наши костные винты соответствуют международным стандартам.</p>',
-                    'en' => '<p>Our bone screws meet international standards for strength and biocompatibility.</p>',
+                    'en' => '<p>Our bone screws meet international standards.</p>',
                 ],
                 'slug'        => 'bone-screw',
                 'category_id' => $traumatology->id,
-                'body_part_id'=> $torso?->id,
                 'is_featured' => false,
+                '_body_parts' => [$thoracic?->id],
             ],
             [
-                'title'       => ['hy' => 'Zurchutyun Hastar', 'ru' => 'Хирургический набор', 'en' => 'Surgical Instrument Set'],
+                'title'       => ['hy' => 'Վիրահատական գործիքների հավաքածու', 'ru' => 'Хирургический набор', 'en' => 'Surgical Instrument Set'],
                 'description' => [
-                    'hy' => '<p>Мer zurchutyan hastar parvum en barcr kogekhanum.</p>',
-                    'ru' => '<p>Наш хирургический набор выпускается в высококачественном исполнении.</p>',
-                    'en' => '<p>Our surgical instrument set is manufactured to the highest quality standards.</p>',
+                    'hy' => '<p>Մեր վիրահատական գործիքների հավաքածուն բարձրագույն որակիով:</p>',
+                    'ru' => '<p>Наш хирургический набор высококачественного исполнения.</p>',
+                    'en' => '<p>Our surgical instrument set is manufactured to highest quality.</p>',
                 ],
                 'slug'        => 'surgical-instrument-set',
                 'category_id' => $instruments->id,
-                'body_part_id'=> null,
                 'is_featured' => false,
+                '_body_parts' => [],
             ],
             [
-                'title'       => ['hy' => 'Hognayin Sham', 'ru' => 'Позвоночный имплантат', 'en' => 'Spinal Implant'],
+                'title'       => ['hy' => 'Ողնաշարի իմպլանտ', 'ru' => 'Позвоночный имплантат', 'en' => 'Spinal Implant'],
                 'description' => [
-                    'hy' => '<p>Мер hognayin shamer nakhagtsats en mugnayin verkangnman hamar.</p>',
-                    'ru' => '<p>Наши позвоночные имплантаты разработаны для восстановления позвоночника.</p>',
-                    'en' => '<p>Our spinal implants are designed for spinal reconstruction and stabilization.</p>',
+                    'hy' => '<p>Մեր ողնաշարի իմպլանտները ողնաշարի վերականգման համար:</p>',
+                    'ru' => '<p>Наши позвоночные имплантаты для восстановления позвоночника.</p>',
+                    'en' => '<p>Our spinal implants are designed for spinal reconstruction.</p>',
                 ],
                 'slug'        => 'spinal-implant',
                 'category_id' => $orthopedics->id,
-                'body_part_id'=> $torso?->id,
                 'is_featured' => true,
+                '_body_parts' => [$thoracic?->id],
             ],
         ];
 
         foreach ($productsData as $data) {
-            Product::create($data);
+            $bodyPartIds = array_filter($data['_body_parts'] ?? []);
+            unset($data['_body_parts']);
+            $product = Product::create($data);
+            if ($bodyPartIds) {
+                $product->bodyParts()->attach($bodyPartIds);
+            }
         }
 
-        $this->command->info('✓ Database seeded successfully!');
+        $this->command->info('Database seeded successfully!');
         $this->command->info('  - 6 categories (3 main + 3 sub)');
-        $this->command->info('  - 4 body parts');
+        $this->command->info('  - 17 body parts');
         $this->command->info('  - 1 about us singleton');
-        $this->command->info('  - 4 news items');
+        $this->command->info('  - 2 news items');
         $this->command->info('  - 6 products');
     }
 }

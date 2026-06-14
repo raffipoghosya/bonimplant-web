@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\BodyPart;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\SkeletonPart;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -23,7 +22,7 @@ class ProductController extends Controller
             ->get();
 
         $query = Product::where('is_active', true)
-            ->with(['category', 'bodyPart', 'media']);
+            ->with(['category', 'bodyParts', 'media']);
 
         // Filter by category
         if ($categoryId = $request->get('category')) {
@@ -32,7 +31,7 @@ class ProductController extends Controller
 
         // Filter by body part
         if ($bodyPartId = $request->get('body_part')) {
-            $query->where('body_part_id', $bodyPartId);
+            $query->whereHas('bodyParts', fn ($q) => $q->where('body_parts.id', $bodyPartId));
         }
 
         // Search
@@ -49,8 +48,20 @@ class ProductController extends Controller
         $selectedCategory = $categoryId ? Category::find($categoryId) : null;
         $selectedBodyPart = $bodyPartId ? BodyPart::find($bodyPartId) : null;
 
-        // Skeleton tooltip data — keyed by svg_element_id
-        $skeletonParts = SkeletonPart::forFrontend();
+        $locale = app()->getLocale();
+        $skeletonParts = BodyPart::where('is_active', true)
+            ->whereNotNull('svg_element_ids')
+            ->get()
+            ->flatMap(function ($bp) use ($locale) {
+                $name = $bp->getTranslation('name', $locale) ?: $bp->getTranslation('name', 'en');
+                $ids = $bp->svg_element_ids ?? [];
+                $mapped = [];
+                foreach ($ids as $svgId) {
+                    $mapped[$svgId] = ['name' => $name, 'body_part_id' => $bp->id];
+                }
+                return $mapped;
+            })
+            ->toArray();
 
         return view('products.index', compact(
             'categories', 'bodyParts', 'products',
@@ -60,7 +71,7 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $product->load(['category', 'bodyPart', 'media']);
+        $product->load(['category', 'bodyParts', 'media']);
 
         $categories = Category::whereNull('parent_id')
             ->where('is_active', true)
@@ -72,8 +83,20 @@ class ProductController extends Controller
 
         $gallery = $product->getMedia('gallery');
 
-        // Skeleton tooltip data — keyed by svg_element_id
-        $skeletonParts = SkeletonPart::forFrontend();
+        $locale = app()->getLocale();
+        $skeletonParts = BodyPart::where('is_active', true)
+            ->whereNotNull('svg_element_ids')
+            ->get()
+            ->flatMap(function ($bp) use ($locale) {
+                $name = $bp->getTranslation('name', $locale) ?: $bp->getTranslation('name', 'en');
+                $ids = $bp->svg_element_ids ?? [];
+                $mapped = [];
+                foreach ($ids as $svgId) {
+                    $mapped[$svgId] = ['name' => $name, 'body_part_id' => $bp->id];
+                }
+                return $mapped;
+            })
+            ->toArray();
 
         return view('products.show', compact('product', 'categories', 'bodyParts', 'gallery', 'skeletonParts'));
     }

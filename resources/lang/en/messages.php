@@ -45,4 +45,9 @@ return [
     'lang_hy' => 'ARM',
     'lang_ru' => 'RUS',
     'lang_en' => 'ENG',
+
+    'zone_head' => 'Head / Neck',
+    'zone_torso' => 'Torso / Spine',
+    'zone_upper_limbs' => 'Upper Limbs',
+    'zone_lower_limbs' => 'Lower Limbs',
 ];
